@@ -13,6 +13,14 @@ const items = [
       img: "https://images.pexels.com/photos/18073372/pexels-photo-18073372/free-photo-of-young-man-sitting-in-a-car-on-a-night-street.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
       link: "https://seoblog-three.vercel.app/",
     },
+    {
+        id: 2,
+        color: "from-green-300 to-yellow-300",
+        title: "React Social Media Website",
+        desc: "This is a Social media website built using MERN stack.",
+        img: "https://images.pexels.com/photos/18073372/pexels-photo-18073372/free-photo-of-young-man-sitting-in-a-car-on-a-night-street.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+        link: "https://social-media-network-100.vercel.app/",
+    },
   
 ]
 
@@ -21,7 +29,7 @@ const MyWorksComponenet = () => {
     const ref = useRef();
     const {scrollYProgress} = useScroll({target:ref});
 
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-0%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
     return (
         <motion.div className="h-full" initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>
