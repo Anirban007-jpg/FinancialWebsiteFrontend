@@ -104,10 +104,10 @@ const Navbar = () => {
       {/* RESPONSIVE MENU */}
       <div className='md:hidden'>
               {/* MENU BUTTON*/}
-              <button className='w-3 h-8 flex flex-col justify-between z-50 relative' onClick={(() => setOpen((prev) => !prev))}>
-                <motion.div variants={topVariants} animate={open ? "opened":"closed"} className='w-10 h-1 bg-black rounded origin-left'></motion.div>
-                <motion.div variants={centerVariants} animate={open ? "opened":"closed"} className='w-10 h-1 bg-black rounded'></motion.div>
-                <motion.div variants={bottomVariants} animate={open ? "opened":"closed"} className='w-10 h-1 bg-black rounded origin-left'></motion.div>
+              <button className='w-10 h-8 flex flex-col justify-between z-50 relative' onClick={(() => setOpen((prev) => !prev))}>
+                <motion.div variants={topVariants} animate={open ? "opened":"closed"} className='w-8 h-1 translate-x-[-200] bg-black rounded origin-left'></motion.div>
+                <motion.div variants={centerVariants} animate={open ? "opened":"closed"} className='w-8 h-1 translate-x-[-200] bg-black rounded'></motion.div>
+                <motion.div variants={bottomVariants} animate={open ? "opened":"closed"} className='w-8 h-1 translate-x-[-200] bg-black rounded origin-left'></motion.div>
               </button>
               {/* MENU LIST*/}
               {open && (

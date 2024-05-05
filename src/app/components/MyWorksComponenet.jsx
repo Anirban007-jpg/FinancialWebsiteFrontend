@@ -36,7 +36,7 @@ const MyWorksComponenet = () => {
             <div className='h-[600vh] relative' ref={ref}>
                 <div className='w-screen h-[calc(100vh-6rem)] flex items-center justify-center text-8xl text-center'>My Works</div>
                     <div className='sticky top-0 flex h-screen gap-4 items-center overflow-hidden'>
-                        <motion.div style={{x}} className='flex'>
+                        <motion.div style={{x}} transition={{ when: "beforeChildren",staggerChildren: 0}}className='flex'>
                         {items.map(item => (<div className={`h-screen w-screen flex items-center justify-center bg-gradient-to-r ${item.color}`} key={item.id}>
                             <div className='flex flex-col gap-8 text-white'>
                                 <h1 className='text-xl font-bold md:text-4xl lg:text-6xl xl:text-8xl'>{item.title}</h1>
