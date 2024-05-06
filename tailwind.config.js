@@ -19,7 +19,6 @@ module.exports = {
       'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
 
-
       'mdd': '375px',
       // => @media (min-width: 768px) { ... }
 
