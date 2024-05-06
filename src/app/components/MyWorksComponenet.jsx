@@ -10,7 +10,7 @@ const items = [
       color: "from-red-300 to-blue-300",
       title: "MultiBlogging Website",
       desc: "This is a multiBlogging website built using mongodb,framer motion , taiwncss and nextjs with nodejs and expressjs with authentication and authorisation.",
-      img: "https://images.pexels.com/photos/18073372/pexels-photo-18073372/free-photo-of-young-man-sitting-in-a-car-on-a-night-street.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+      img: "https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       link: "https://seoblog-three.vercel.app/",
     },
     {
@@ -18,7 +18,7 @@ const items = [
         color: "from-green-300 to-yellow-300",
         title: "React Social Media Website",
         desc: "This is a Social media website built using MERN stack.",
-        img: "https://images.pexels.com/photos/18073372/pexels-photo-18073372/free-photo-of-young-man-sitting-in-a-car-on-a-night-street.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+        img: "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         link: "https://social-media-network-100.vercel.app/",
     },
   

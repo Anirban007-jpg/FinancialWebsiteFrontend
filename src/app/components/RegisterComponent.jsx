@@ -100,10 +100,10 @@ const RegisterComponent = () => {
   }
 
   return (
-    <motion.div className="h-full w-full" initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>
+    <motion.div className="h-full smm:h-[140vh] mdd:h-[140vh] w-full " initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>
       <div className="flex items-center justify-center h-full overflow-scroll">
         {/* <div className='sm:pt-30'></div> */}
-        <form className='relative flex flex-col m-6 space-y-8 bg-gray-300 shadow-2xl sm:mt-20 lg:mt-8 md:mt-[550px] rounded-2xl md:flex-row md:space-y-0' onSubmit={handleSubmit}>
+        <form className='relative flex flex-col m-6 space-y-8 bg-gray-300 shadow-2xl smm:mt-8  mdd:mt-12 rounded-2xl md:flex-row md:space-y-0' onSubmit={handleSubmit}>
           <div className='flex flex-col justify-center p-8 md:p-14'>
             <span className='mb-1 text-3xl font-bold text-center underline uppercase text-blue-500'>Sign up</span>
             <span className='mb-8 text-center text-black font-semibold'>Welcome ! Please Register yourself</span>
