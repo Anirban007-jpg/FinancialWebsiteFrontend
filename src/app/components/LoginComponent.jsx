@@ -12,7 +12,7 @@ const LoginComponent = () => {
             {/* LEFT SIDE*/}
             <div className='md:w-1/2 mdd:w-full px-10'>
               <h2 className='font-extrabold text-3xl text-blue-950 text-center underline uppercase mb-10'>Login</h2>
-              <p className='font-sm font-semibold mt-4 mb-16'>If u are already a member, Please sign in</p>
+              <p className='font-semibold mt-4 mb-7 text-sm text-pink-700 text-center underline'>Already a member ?.. Please sign in !!!</p>
               <form className='md:flex mdd:flex md:flex-col mdd:flex-col flex flex-col gap-4'>
                 <div className='py-4 grid grid-cols-1 gap-4'>
                   <div className='relative mt-8'>

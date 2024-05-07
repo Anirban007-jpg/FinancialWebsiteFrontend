@@ -18,7 +18,7 @@ const PortfolioComponent = () => {
   return (
     <motion.div className="h-full" initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>
         {/* CONTAINER */}
-        <div className='h-full overflow-scroll lg:flex' ref={containerRef}>
+        <div className='h-full lg:flex' ref={containerRef}>
           {/* TEXT CONTAINER */}
           <div className='p-4 sm:p-8 md:p-12 lg:p-20 xl:p-48 flex flex-col gap-24 md:gap-32 lg:gap-48 xl:gap-64 lg:w-2/3 lg:pr-0 xl:2-1/2'>
               {/* BIOGRAPHY CONTAINER */}
@@ -116,7 +116,7 @@ const PortfolioComponent = () => {
                   </div>
                   {/* JOB DESC */}
                   <div className="p-3 text-sm italic">
-                    I performed GST Filings and ITR Fillings.{" "}
+                    I performed GST Reconcilliations and ITR Computations and Account Finalization.{" "}
                   </div>
                   {/* JOB DATE */}
                   <div className="p-3 text-red-400 text-sm font-semibold">
@@ -158,7 +158,7 @@ const PortfolioComponent = () => {
                   </div>
                   {/* JOB DESC */}
                   <div className="p-3 text-sm italic">
-                    I performed accounts realted work in tally.{" "}
+                    I performed accounts related work in tally.{" "}
                   </div>
                   {/* JOB DATE */}
                   <div className="p-3 text-red-400 text-sm font-semibold">
