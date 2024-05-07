@@ -55,22 +55,6 @@ export const getCookie = key => {
         return false;
     }
 };
-
-export const signout = next => {
-    removeCookie('token');
-    removeLocalStorage('company');
-    next();
-
-    return fetch(`${process.env.DOMAIN}/signout`, {
-        method: 'GET'
-    })
-        .then(response => {
-            console.log('signout success');
-        })
-        .catch(err => console.log(err));
-};
-
-
 // localstorage
 export const setLocalStorage = (key, value) => {
     if (process.browser) {
@@ -86,7 +70,7 @@ export const removeLocalStorage = key => {
 // autheticate user by pass data to cookie and localstorage
 export const authenticate = (data, next) => {
     setCookie('token', data.token);
-    setLocalStorage('company', data.company);
+    setLocalStorage('loggedinuser', data.individual);
     next();
 };
 
@@ -94,8 +78,31 @@ export const isAuth = () => {
     if (process.browser) {
         const cookieChecked = getCookie('token');
         if (cookieChecked) {
-            if (localStorage.getItem('company')) {
-                return JSON.parse(localStorage.getItem('company'));
+            if (localStorage.getItem('loggedinuser')) {
+                return JSON.parse(localStorage.getItem('loggedinuser'));
+            } else {
+                return false;
+            }
+        }
+    }else{
+        return false;
+    }
+};
+
+
+// autheticate user by pass data to cookie and localstorage
+export const authenticateforcompanyuser = (data, next) => {
+    setCookie('token', data.token);
+    setLocalStorage('loggedincompanyuser', data.company);
+    next();
+};
+
+export const isAuthforCompanyuser = () => {
+    if (process.browser) {
+        const cookieChecked = getCookie('token');
+        if (cookieChecked) {
+            if (localStorage.getItem('loggedincompanyuser')) {
+                return JSON.parse(localStorage.getItem('loggedincompanyuser'));
             } else {
                 return false;
             }
@@ -107,10 +114,10 @@ export const isAuth = () => {
 
 export const updateUser = (user, next) => {
     if (process.browser) {
-        if (localStorage.getItem('user')) {
-            let auth = JSON.parse(localStorage.getItem('user'));
+        if (localStorage.getItem('loggedinuser')) {
+            let auth = JSON.parse(localStorage.getItem('loggedinuser'));
             auth = user;
-            localStorage.setItem('user', JSON.stringify(auth));
+            localStorage.setItem('loggedinuser', JSON.stringify(auth));
             next();
         }
     }
@@ -154,6 +161,36 @@ export const resetPassword = resetInfo => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(resetInfo)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+export const signin = info => {
+    return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/login`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+export const companysignin = info => {
+    return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/companylogin`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info)
     })
         .then(response => {
             return response.json();

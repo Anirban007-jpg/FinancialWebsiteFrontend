@@ -3,9 +3,11 @@ import Image from "next/image";
 import HeadingforHomePage from "./components/HeadingforHomePage";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import TransitionProvider from "./components/TransitionProvider";
 
 const Homepage = () => {
   return (
+    <TransitionProvider>
     <motion.div className="h-full" initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>
       <div className="h-full flex flex-col lg:flex-row px-4 overflow-scroll sm:px-20 md:px-12 lg:px-20 xl:px-48">
         {/* IMAGE CONTAINER */}
@@ -26,6 +28,7 @@ const Homepage = () => {
         </div>
       </div>
     </motion.div>
+    </TransitionProvider>
   );
 };
 

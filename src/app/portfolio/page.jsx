@@ -1,5 +1,6 @@
 import React from 'react'
 import PortfolioComponent from '../components/PortfolioComponent'
+import TransitionProvider from '../components/TransitionProvider';
 
 export const metadata = {
   title: "FINANCIA | PORTFOLIO PAGE",
@@ -8,9 +9,9 @@ export const metadata = {
 
 const page = () => {
   return (
-    <>
+    <TransitionProvider>
         <PortfolioComponent/>
-    </>
+    </TransitionProvider>
   )
 }
 

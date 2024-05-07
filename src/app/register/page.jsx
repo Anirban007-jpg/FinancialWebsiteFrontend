@@ -1,5 +1,6 @@
 import React from 'react'
 import RegisterComponent from '../components/RegisterComponent'
+import TransitionProvider from '../components/TransitionProvider';
 
 export const metadata = {
   title: "FINANCIA | REGISTER PAGE",
@@ -9,9 +10,9 @@ export const metadata = {
 
 const page = () => {
   return (
-    <>
+    <TransitionProvider>
         <RegisterComponent/>
-    </>
+    </TransitionProvider>
   )
 }
 

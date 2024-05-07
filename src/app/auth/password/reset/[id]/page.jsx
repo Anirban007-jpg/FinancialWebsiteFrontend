@@ -1,5 +1,6 @@
 import ForgotPasswordCompanyComponent from '@/app/components/ForgotPasswordCompanyComponent';
 import ResetPasswordComponent from '@/app/components/ResetPasswordComponent';
+import TransitionProvider from '@/app/components/TransitionProvider';
 import React from 'react'
 
 
@@ -11,9 +12,9 @@ export const metadata = {
 
 const page = () => {
   return (
-    <>
+    <TransitionProvider>
         <ResetPasswordComponent/>
-    </>
+    </TransitionProvider>
   )
 }
 

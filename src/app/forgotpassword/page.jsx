@@ -1,5 +1,6 @@
 import React from 'react'
 import ForgotPasswordComponent from '../components/ForgotPasswordComponent'
+import TransitionProvider from '../components/TransitionProvider';
 
 export const metadata = {
   title: "FINANCIA | FORGOT PASSWORD PAGE",
@@ -9,9 +10,9 @@ export const metadata = {
 
 const page = () => {
   return (
-    <>
+    <TransitionProvider>
         <ForgotPasswordComponent/>
-    </>
+    </TransitionProvider>
   )
 }
 
