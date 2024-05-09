@@ -31,6 +31,20 @@ export const companySignup = data => {
         .catch(err => console.log(err));
 };
 
+export const signout = next => {
+    removeCookie('token');
+    removeLocalStorage('loggedinuser');
+    next();
+
+    return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/signout`, {
+        method: 'GET'
+    })
+        .then(response => {
+            console.log('signout success');
+        })
+        .catch(err => console.log(err));
+};
+
 // set cookie
 export const setCookie = (key, value) => {
     if (process.browser) {
@@ -74,6 +88,14 @@ export const authenticate = (data, next) => {
     next();
 };
 
+
+// autheticate user by pass data to cookie and localstorage
+export const authenticateforcompanyuser = (data, next) => {
+    setCookie('token', data.token);
+    setLocalStorage('loggedinuser', data.company);
+    next();
+};
+
 export const isAuth = () => {
     if (process.browser) {
         const cookieChecked = getCookie('token');
@@ -90,27 +112,21 @@ export const isAuth = () => {
 };
 
 
-// autheticate user by pass data to cookie and localstorage
-export const authenticateforcompanyuser = (data, next) => {
-    setCookie('token', data.token);
-    setLocalStorage('loggedincompanyuser', data.company);
-    next();
-};
 
-export const isAuthforCompanyuser = () => {
-    if (process.browser) {
-        const cookieChecked = getCookie('token');
-        if (cookieChecked) {
-            if (localStorage.getItem('loggedincompanyuser')) {
-                return JSON.parse(localStorage.getItem('loggedincompanyuser'));
-            } else {
-                return false;
-            }
-        }
-    }else{
-        return false;
-    }
-};
+// export const isAuthforCompanyuser = () => {
+//     if (process.browser) {
+//         const cookieChecked = getCookie('token');
+//         if (cookieChecked) {
+//             if (localStorage.getItem('loggedincompanyuser')) {
+//                 return JSON.parse(localStorage.getItem('loggedincompanyuser'));
+//             } else {
+//                 return false;
+//             }
+//         }
+//     }else{
+//         return false;
+//     }
+// };
 
 export const updateUser = (user, next) => {
     if (process.browser) {

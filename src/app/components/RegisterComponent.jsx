@@ -1,9 +1,10 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { companySignup, individualSignup } from '../../../actions/auth'
+import { companySignup, individualSignup, isAuth } from '../../../actions/auth'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const RegisterComponent = () => {
 
@@ -36,6 +37,16 @@ const RegisterComponent = () => {
       setIsAccepted(!isAccepted)
     }
   }
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuth() && isAuth().role === 'Individual'){
+      router.push('/Individual/Dashboard')
+    } else if (isAuth() && isAuth().role === 'Company'){
+      router.push('/Company/Dashboard')
+    }
+  }, [])
 
   
   const {role,error,success,Company_Name,TAN_No, Company_email,Company_address,Company_contact_no,password,confirmedPassword,Name,PAN_No,Email,Address,Contact_no,loading} = values;
@@ -101,7 +112,7 @@ const RegisterComponent = () => {
 
   return (
     <motion.div className="h-full smm:h-[140vh] mdd:h-[140vh] w-screen " initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>
-      <div className="flex items-center justify-center h-full smm:h-full smm:scroll-auto smm:overflow-scroll lg:overflow-scroll scroll-auto overflow-scroll">
+      <div className="flex items-center justify-center h-full smm:h-full">
         {/* <div className='sm:pt-30'></div> */}
         <form className='relative flex flex-col m-4 space-y-8 md:mt-[-150px] bg-gray-300 shadow-2xl smm:mt-8 mdd:mt-12 rounded-2xl md:flex-row md:space-y-0' onSubmit={handleSubmit}>
           <div className='flex flex-col justify-center p-8 md:p-14'>
@@ -110,7 +121,7 @@ const RegisterComponent = () => {
             <div className='py-4 grid grid-cols-1 gap-4'>
               <div className='relative'>
                 <select value={role} onChange={handleChangeInput("role")} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option selected>Choose a role</option>
+                  <option value="">Choose a role</option>
                   <option value="Company">Company</option>
                 <option value="Individual">Individual</option>
                 </select>

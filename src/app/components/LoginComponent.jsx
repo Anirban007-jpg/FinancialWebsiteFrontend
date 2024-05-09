@@ -1,10 +1,10 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaGoogle } from "react-icons/fa";
 import { motion } from 'framer-motion'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { authenticate, authenticateforcompanyuser, companysignin, signin } from '../../../actions/auth';
+import { authenticate, authenticateforcompanyuser, companysignin, isAuth, signin } from '../../../actions/auth';
 
 const LoginComponent = () => {
 
@@ -17,6 +17,15 @@ const LoginComponent = () => {
   });
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (isAuth() && isAuth().role === 'Individual'){
+      router.push('/Individual/Dashboard')
+    } else if (isAuth() && isAuth().role === 'Company'){
+      router.push('/Company/Dashboard')
+    }
+  }, [])
+
 
   const {role,PAN_No,TAN_No,password} = values;
 

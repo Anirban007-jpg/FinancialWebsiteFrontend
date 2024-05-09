@@ -1,6 +1,7 @@
 import React from 'react'
 import MyWorksComponenet from '../components/MyWorksComponenet'
 import TransitionProvider from '../components/TransitionProvider';
+import MyWorkTransitionProviderComponent from '../components/MyWorkTransitionProviderComponent';
 
 
 export const metadata = {
@@ -10,9 +11,9 @@ export const metadata = {
   
 const page = () => {
   return (
-    <TransitionProvider>
+    <MyWorkTransitionProviderComponent>
         <MyWorksComponenet />
-    </TransitionProvider>
+    </MyWorkTransitionProviderComponent>
   )
 }
 

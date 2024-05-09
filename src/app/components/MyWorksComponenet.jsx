@@ -2,7 +2,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { isAuth } from '../../../actions/auth'
+import { useRouter } from 'next/navigation'
+
 
 const items = [
     {
@@ -31,11 +34,21 @@ const MyWorksComponenet = () => {
 
     const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
+    const router = useRouter();
+
+    useEffect(() => {
+        if (isAuth() && isAuth().role === 'Individual'){
+          router.push('/Individual/Dashboard')
+        } else if (isAuth() && isAuth().role === 'Company'){
+          router.push('/Company/Dashboard')
+        }
+      }, [])
+
     return (
         <motion.div className="h-[130vh]" initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>
             <div className='h-full relative' ref={ref}>
                 <div className='w-screen h-[calc(100vh-6rem)] flex items-center justify-center text-8xl text-center'>My Works</div>
-                    <div className='sticky w-full top-0 flex h-screen gap-4 items-center overflow-scroll'>
+                    <div className='sticky w-full top-0 flex h-screen gap-4 items-center kam'>
                         <motion.div style={{x}} transition={{ when: "beforeChildren",staggerChildren: 0}}className='flex'>
                         {items.map(item => (<div className={`h-screen w-screen flex items-center justify-center bg-gradient-to-r ${item.color}`} key={item.id}>
                             <div className='flex flex-col gap-8 text-white'>

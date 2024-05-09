@@ -1,11 +1,14 @@
 'use client'
 import { motion, useInView, useScroll } from 'framer-motion'
 import Image from 'next/image'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Brain from './Brain'
+import { isAuth } from '../../../actions/auth'
+import { useRouter } from 'next/navigation'
 
 const PortfolioComponent = () => {
 
+  const router = useRouter();
   const containerRef = useRef();
   const {scrollYProgress} = useScroll({container: containerRef})
 
@@ -14,6 +17,14 @@ const PortfolioComponent = () => {
 
   const experienceRef = useRef();
   const isExperienceRefInView = useInView(experienceRef, {margin: "-100px"});
+  
+  useEffect(() => {
+    if (isAuth() && isAuth().role === 'Individual'){
+      router.push('/Individual/Dashboard')
+    } else if (isAuth() && isAuth().role === 'Company'){
+      router.push('/Company/Dashboard')
+    }
+  }, [])
 
   return (
     <motion.div className="h-full" initial={{y:"-200vh"}} animate={{y:"0%"}} transition={{duration: 1}}>

@@ -1,8 +1,10 @@
 'use client'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/router';
+
 import React, { useEffect, useState } from 'react'
 import { emailContactForm } from '../../../actions/contact';
+import { isAuth } from '../../../actions/auth';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -16,15 +18,15 @@ const ContactUsComponent = () => {
     loading: false
     });
 
-    // const router = useRouter();
-    
-// useEffect(() => {
-//   if (isAuth() && isAuth().role === 'Company'){
-//    router.push('/Company/Dashboard')
-//   }else  if (isAuth() && isAuth().role === 'Admin'){
-//       router.push('/Admin/Dashboard')
-//   }
-// }, [])
+    const router = useRouter();
+
+    useEffect(() => {
+      if (isAuth() && isAuth().role === 'Individual'){
+        router.push('/Individual/Dashboard')
+      } else if (isAuth() && isAuth().role === 'Company'){
+        router.push('/Company/Dashboard')
+      }
+    }, [])
 
 
   const { usermessage, name, email, success, error,loading} = values;

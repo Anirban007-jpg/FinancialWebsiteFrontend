@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
-import React, { useState } from 'react'
-import { forgotPassword, forgotPasswordforcompanyusers, resetPassword } from '../../../actions/auth';
+import React, { useEffect, useState } from 'react'
+import { forgotPassword, forgotPasswordforcompanyusers, isAuth, resetPassword } from '../../../actions/auth';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 // import { useRouter } from 'next/router';
@@ -16,6 +16,7 @@ const ResetPasswordComponent = () => {
         message: '',
       });
   
+      
       const router = useRouter();
       const params = useParams();
       const id = params.id;
@@ -25,6 +26,14 @@ const ResetPasswordComponent = () => {
       const handleChange = (name) => e => {
           setValues({...values, error: '', [name]: e.target.value});
       }
+
+      useEffect(() => {
+        if (isAuth() && isAuth().role === 'Individual'){
+          router.push('/Individual/Dashboard')
+        } else if (isAuth() && isAuth().role === 'Company'){
+          router.push('/Company/Dashboard')
+        }
+      }, [])
 
       const handleSubmit = (e) => {
         e.preventDefault();
