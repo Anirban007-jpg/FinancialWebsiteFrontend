@@ -30,6 +30,7 @@ const items = [
 const MyWorksComponenet = () => {
 
     const ref = useRef();
+    const itemRef = useRef();
     const {scrollYProgress} = useScroll({target:ref});
 
     const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
@@ -41,7 +42,15 @@ const MyWorksComponenet = () => {
           router.push('/Individual/Dashboard')
         } else if (isAuth() && isAuth().role === 'Company'){
           router.push('/Company/Dashboard')
-        }
+        } 
+
+        // setInterval(() => {
+        //     items.forEach((item) => {
+        //         if (document.getElementById(item.id)){
+        //             document.getElementById(item.id).scrollIntoView();
+        //         }
+        //     })
+        // }, 1000);
       }, [])
 
     return (
@@ -49,8 +58,8 @@ const MyWorksComponenet = () => {
             <div className='h-full relative' ref={ref}>
                 <div className='w-screen h-[calc(100vh-6rem)] flex items-center justify-center text-8xl text-center'>My Works</div>
                     <div className='sticky w-full top-0 flex h-screen gap-4 items-center kam'>
-                        <motion.div style={{x}} transition={{ when: "beforeChildren",staggerChildren: 0}}className='flex'>
-                        {items.map(item => (<div className={`h-screen w-screen flex items-center justify-center bg-gradient-to-r ${item.color}`} key={item.id}>
+                        <motion.div style={{x}} transition={{ when: "beforeChildren",staggerChildren: 0}} className='flex'>
+                        {items.map(item => (<div id={item.id} className={`h-screen w-screen flex items-center justify-center bg-gradient-to-r ${item.color}`} key={item.id}>
                             <div className='flex flex-col gap-8 text-white'>
                                 <h1 className='text-xl font-bold md:text-4xl lg:text-6xl xl:text-8xl'>{item.title}</h1>
                                 <div className='relative w-80 h-56 md:w-96 md:h-64 lg:w-[500px] lg:h-[350px] xl:w-[600px] xl:h-[420px]'>

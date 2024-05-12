@@ -76,15 +76,15 @@ const Dashboard = () => {
 
           {/* Right section */}
           <div id="right" className='p-2 flex flex-col justify-center items-center gap-4 h-full'>
-            <div id='top' className='bg-slate-100 p-8 w-full rounded-xl flex flex-col justify-center items-center gap-6 h-fit'>
+            <div id='top' className='border-s-gray-500 border-[1px] bg-transparent p-8 w-full rounded-xl flex flex-col justify-center items-center gap-6 h-fit'>
               <div id='image-box' className='w-full flex flex-col justify-center items-center gap-4'>
-                <img src='/download.png' alt='' className='rounded-full w-[100px] h-[100px]'/>
+                <img src='/download.png' alt='' className='rounded-full w-[100px] h-[100px] bg-white'/>
                 <div className='flex flex-col justify-center items-center'>
                   <h1 className='text-black font-bold text-2xl'>{data.Name}</h1>
-                  <p className='text-slate-700 text-lg fonr-semibold'>{data.Email}</p>
+                  <p className='text-slate-200 text-lg font-semibold'>{data.Email}</p>
                 </div>
               </div>
-              <div id="user-income-details" className='flex justify-between items-center gap-8 w-full'>
+              <div id="user-income-details" className='flex justify-between items-center gap-4 w-full'>
                 <div className='flex flex-col justify-center items-start'>
                   <h1 className='text-2xl text-black font-semibold'>193</h1>
                   <p className=''>Income</p>
@@ -99,9 +99,9 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div id='bottom' className='bg-gray-200 w-full h-full p-6 rounded-xl flex flex-col justify-center items-center gap-8'>
+            <div id='bottom' className='bg-transparent border-s-gray-500 border-[1px] w-full h-full p-6 rounded-xl flex flex-col justify-center items-center gap-8'>
             <div className='flex md:flex-row flex-col justify-between items-center w-full gap-2'>
-              <h1 className='text-white text-md'>Will be developed later</h1>
+              <h1 className='text-black text-bold text-md'>Will be developed later</h1>
             </div>
           </div>
           </div>

@@ -4,14 +4,14 @@ import { MdDashboard, MdLogout } from 'react-icons/md';
 import {} from 'react-icons/si';
 import {} from 'react-icons/lia';
 import {} from 'react-icons/io5';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaBook } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { signout } from '../../../../../../actions/auth';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const variants = {
-  expanded: {width: "20%"},
+  expanded: {width: "18%"},
   nonExpanded : {width: "5%"}
 }
 
@@ -22,30 +22,11 @@ const navItems = [
     url : "/Individual/Dashboard"
   },
   {
-    name: "Journal",
-    icon : MdDashboard,
-    url : "/Individual/Journal"
+    name: "Ledger",
+    icon : FaBook,
+    url : "/Individual/Ledger"
   },
-  {
-    name: "Dashboard",
-    icon : MdDashboard,
-    url : "/Individual/Dashboard"
-  },
-  {
-    name: "Dashboard",
-    icon : MdDashboard,
-    url : "/Individual/Dashboard"
-  },
-  {
-    name: "Dashboard",
-    icon : MdDashboard,
-    url : "/Individual/Dashboard"
-  },
-    {
-    name: "Dashboard",
-    icon : MdDashboard,
-    url : "/Individual/Dashboard"
-  }
+  
 
   
 ]
@@ -56,6 +37,7 @@ const Sidebar = () => {
   const [isExpanded,setIsExpanded] = useState(true);
   const router = useRouter();
 
+  const pathname = usePathname();
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -76,7 +58,7 @@ const Sidebar = () => {
 
   },[])
   return (
-    <motion.section animate= {isExpanded ? "expanded":"nonExpanded"} variants={variants} className={'w-1/5 bg-gray-950 relative overflow-y-auto overflow-x-hidden h-full flex flex-col justify-between items-center gap-10 ' + (isExpanded ? 'py-8 px-6 ' : 'px-8 py-6')}>
+    <motion.section animate= {isExpanded ? "expanded":"nonExpanded"} variants={variants} className={'w-1/5 bg-gray-950 relative z-10 overflow-y-auto overflow-x-visible h-full flex flex-col justify-between items-center gap-10 ' + (isExpanded ? 'py-8 px-6 ' : 'px-8 py-6')}>
       <div className='flex flex-col justify-center items-center gap-8'>
         {isExpanded ? (
           <div id='logo-box'>
@@ -90,7 +72,7 @@ const Sidebar = () => {
       }
         <div id="navlinks-box" className='flex flex-col justify-center items-start gap-5 w-full mt-5'>
         {navItems.map((item, index) => (
-          <div key={index} id='link-box' className={'flex justify-start items-center gap-4 w-full cursor-pointer rounded-xl ' + (activeNavIndex === index ? 'bg-yellow-500 text-black font-extrabold ' : 'text-white ') + (isExpanded ? 'px-6 py-2':'p-2')} onClick={() => setactiveNavIndex(index)}>
+          <div key={index} id='link-box' className={'flex justify-start items-center gap-4 w-full cursor-pointer rounded-xl ' + (pathname === item.url ? 'bg-yellow-500 text-black font-extrabold ' : 'text-white ') + (isExpanded ? 'px-6 py-2':'p-2')} onClick={() => setactiveNavIndex(index)}>
             <div className='bg-yellow-300 text-black p-2 rounded-full'>
               <Link href={item.url}><item.icon className='md:w-6 w-4 md:h-6 h-4' /></Link>
             </div>
@@ -100,8 +82,8 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div id="expanded-icon" className='bg-yellow-500 text-black p-2 rounded-full cursor-pointer absolute -right-4 bottom-20 md:bottom-40 md:flex hidden' onClick={() => setIsExpanded(!isExpanded)}>
-        <FaArrowRight/>
+      <div id="expanded-icon" className='bg-yellow-500 text-black p-2 rounded-full cursor-pointer right-3 absolute lgl:bottom-28 md:bottom-0 lg:bottom-0 md:flex hidden' onClick={() => setIsExpanded(!isExpanded)}>
+        <FaArrowRight className='z-40'/>
       </div>
       <div id="logout-box" className='w-full flex flex-col justify-start items-center gap-4 cursor-pointer'>
         <div className='bg-slate-700 w-full h-[0.5px]'></div>
