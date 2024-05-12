@@ -13,7 +13,9 @@ const Header = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    setData(isAuth());
+    if (isAuth()){
+      setData(isAuth());
+    }
   }, [])
   
  
@@ -29,9 +31,9 @@ const Header = () => {
             <Link href="#"><img src="/download.png" alt='client-image' className='rounded-full w-12 h-12 bg-white'/></Link>
             <div className='flex flex-col justify-center items-start'>
               <div className='flex justify-center text-white items-center -mb-1 gap-2'>
-                <h1 className='text-lg font-bold text-white'>Hi, {data.Name}</h1>
+                <h1 className='text-lg font-bold text-white'>Hi, </h1>
               </div>
-              <p className='text-white'>{data.role}</p>
+              <p className='text-white'></p>
             </div>
           </div>
         </div>

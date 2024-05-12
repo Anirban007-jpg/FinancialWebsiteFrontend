@@ -12,7 +12,9 @@ const Dashboard = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    setData(isAuth());
+    if (isAuth()){
+      setData(isAuth());
+    }
   }, [])
   
   // console.log(data);
@@ -80,8 +82,8 @@ const Dashboard = () => {
               <div id='image-box' className='w-full flex flex-col justify-center items-center gap-4'>
                 <img src='/download.png' alt='' className='rounded-full w-[100px] h-[100px] bg-white'/>
                 <div className='flex flex-col justify-center items-center'>
-                  <h1 className='text-black font-bold text-2xl'>{data.Name}</h1>
-                  <p className='text-slate-200 text-lg font-semibold'>{data.Email}</p>
+                  <h1 className='text-black font-bold text-2xl'></h1>
+                  <p className='text-slate-200 text-lg font-semibold'></p>
                 </div>
               </div>
               <div id="user-income-details" className='flex justify-between items-center gap-4 w-full'>
