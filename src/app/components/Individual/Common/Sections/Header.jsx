@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { IoArrowDown, IoSearch } from 'react-icons/io5'
-import { isAuth } from '../../../../../../actions/auth'
+import { getCookie, isAuth } from '../../../../../../actions/auth'
 import { FaBars } from 'react-icons/fa'
 import Link from 'next/link'
 
@@ -15,6 +15,9 @@ const Header = () => {
   useEffect(() => {
     if (isAuth()){
       setData(isAuth());
+    }
+    if (!isAuth() && getCookie('token') === ""){
+      Router.push('/');
     }
   }, [])
   
@@ -31,7 +34,7 @@ const Header = () => {
             <Link href="#"><img src="/download.png" alt='client-image' className='rounded-full w-12 h-12 bg-white'/></Link>
             <div className='flex flex-col justify-center items-start'>
               <div className='flex justify-center text-white items-center -mb-1 gap-2'>
-                <h1 className='text-lg font-bold text-white'>Hi, </h1>
+                <h1 className='text-lg font-bold text-white'>Hi, {data.Name}</h1>
               </div>
               <p className='text-white'></p>
             </div>
