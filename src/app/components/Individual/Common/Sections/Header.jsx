@@ -1,27 +1,30 @@
 'use client'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { IoArrowDown, IoSearch } from 'react-icons/io5'
-import { getCookie, isAuth } from '../../../../../../actions/auth'
+import { getCookie, isAuth, signout } from '../../../../../../actions/auth'
 import { FaBars } from 'react-icons/fa'
 import Link from 'next/link'
 
 const Header = () => {
 
   const pathname  = usePathname();
-
+  const router = useRouter();
   const [data, setData] = useState({});
 
   useEffect(() => {
     if (isAuth()){
       setData(isAuth());
     }
-    if (!isAuth() && getCookie('token') === ""){
-      Router.push('/');
-    }
   }, [])
-  
- 
+
+
+  window.addEventListener("touchstart", () => {
+    if (!isAuth()) {
+      signout(() => router.push('/'))
+    }
+  })
+
 
   return (
     <section className='w-full bg-transparent lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-2 gap-4'>
@@ -36,7 +39,7 @@ const Header = () => {
               <div className='flex justify-center text-white items-center -mb-1 gap-2'>
                 <h1 className='text-lg font-bold text-white'>Hi, {data.Name}</h1>
               </div>
-              <p className='text-white'></p>
+              <p className='text-white'>{data.role}</p>
             </div>
           </div>
         </div>

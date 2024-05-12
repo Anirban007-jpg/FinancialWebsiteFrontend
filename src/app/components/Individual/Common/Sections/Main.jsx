@@ -4,14 +4,6 @@ import Header from './Header'
 import { useRouter } from 'next/navigation';
 import { signout } from '../../../../../../actions/auth';
 import { useIdleTimer } from 'react-idle-timer';
-const events = [
-  "load",
-  "mousemove",
-  "mousedown",
-  "click",
-  "scroll",
-  "keypress",
-];
 
 const Main = ({ children }) => {
 
