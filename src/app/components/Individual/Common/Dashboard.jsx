@@ -20,11 +20,12 @@ const Dashboard = () => {
 
   }, [])
 
-  window.addEventListener("touchstart", () => {
-    if (!isAuth()) {
-      signout(() => router.push('/'))
-    }
-  })
+  // window.addEventListener("touchstart", () => {
+  //   if (!isAuth()) {
+  //     signout(() => router.push('/'))
+  //   }
+  // })
+  
 
   
   // console.log(data);
@@ -88,12 +89,12 @@ const Dashboard = () => {
 
           {/* Right section */}
           <div id="right" className='p-2 flex flex-col justify-center items-center gap-4 h-full'>
-            <div id='top' className='border-s-gray-500 border-[1px] bg-transparent p-8 w-full rounded-xl flex flex-col justify-center items-center gap-6 h-fit'>
+            <div id='top' className='border-[2px] border-s bg-transparent p-8 w-full border-red-600 rounded-xl flex flex-col justify-center items-center gap-6 h-fit'>
               <div id='image-box' className='w-full flex flex-col justify-center items-center gap-4'>
                 <img src='/download.png' alt='' className='rounded-full w-[100px] h-[100px] bg-white' />
                 <div className='flex flex-col justify-center items-center'>
                   <h1 className='text-black font-bold text-2xl'>{data.Name}</h1>
-                  <p className='text-slate-200 text-lg font-semibold'>{data.Email}</p>
+                  <p className='text-green-900 text-lg font-semibold'>{data.Email}</p>
                 </div>
               </div>
               <div id="user-income-details" className='flex justify-between items-center gap-4 w-full'>

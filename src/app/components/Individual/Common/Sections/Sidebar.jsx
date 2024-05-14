@@ -19,7 +19,7 @@ const navItems = [
   {
     name: "Dashboard",
     icon : MdDashboard,
-    url : "/Individual/Dashboard"
+    url : "/Individual/Dashboard",
   },
   {
     name: "Ledger",

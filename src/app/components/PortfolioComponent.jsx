@@ -12,6 +12,12 @@ const PortfolioComponent = () => {
   const containerRef = useRef();
   const {scrollYProgress} = useScroll({container: containerRef})
 
+  useEffect(() => {
+    if (isAuth()) {
+      router.push('/Individual/Dashboard')
+    }
+  }, [])
+
   const skillRef = useRef();
   const isSkillRefInView = useInView(skillRef, {margin: "-100px"});
 
