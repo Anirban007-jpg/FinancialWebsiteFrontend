@@ -35,7 +35,7 @@ const LedgerCreateFormComponent = () => {
     const { Account_Name, Currency, Financial_Year, Assessment_Year, Rate_of_tax, Type_of_Item, Account_Group, Head_Item_Group, Tax_Account_Type, Account_Class, Bal_Start, Account_SubClass, Account_Balance_Type, success, error, loading } = values;
 
     const handleChangeInput = (name) => e => {
-        setValues({ ...values, error: '', [name]: e.target.value })
+        setValues({ ...values, error: '',success:'', [name]: e.target.value })
     }
 
     const token = getCookie('token');
@@ -49,7 +49,22 @@ const LedgerCreateFormComponent = () => {
                 setValues({ ...values, error: data.error });
             }
             else {
-                setValues({ ...values, error: '', success: data.message });
+                setValues({ 
+                    Account_Name: "",
+                    Financial_Year: "",
+                    Assessment_Year: "",
+                    Rate_of_tax: "",
+                    Type_of_Item: "",
+                    Account_Group: "",
+                    Head_Item_Grou: "",
+                    Tax_Account_Type: "",
+                    Account_Class: "",
+                    Bal_Start: "",
+                    Account_SubClass: "",
+                    Account_Balance_Type: "",
+                    Currency: "",
+                    error: '',
+                    success: data.message });
             }
         })
     }
@@ -137,7 +152,7 @@ const LedgerCreateFormComponent = () => {
                                         <option value="Indirect Income">Indirect Income</option>
                                         <option value="Direct Income">Direct Income</option>
                                         <option value="Indirect Expenses">Indirect Expenses</option>
-                                        <option value="Direct Expenses">Indirect Expenses</option>
+                                        <option value="Direct Expenses">Direct Expenses</option>
                                     </select>
                                 </div>
                                 <div className='input-field'>
@@ -206,7 +221,7 @@ const LedgerCreateFormComponent = () => {
                     {error && (
                         <div className='border-s border-[2px] bg-red-500-500 flex flex-row items-center justify-center rounded-full'>
                             <span className="text-white font-bold text-center mt-0">
-                                {success}
+                                {error}
                             </span>
                         </div>
                     )}
