@@ -94,13 +94,13 @@ const DisplayLedgersComponent = () => {
   }, [search])
 
   
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className='w-full bg-slate-200 h-screen flex justify-between items-start'>
       <Sidebar />
       <Main>
-        <div style={{ padding: "50px 10%" }} id="main-section" className='flex overflow-x-scroll flex-col rounded-lg items-center justify-center w-full'>
+        <div  id="main-section" className='flex overflow-x-scroll flex-col rounded-lg items-center justify-center w-full'>
           <DataTable customStyles={tableHeaderstyle} columns={column} data={filter} subHeader selectableRows subHeaderComponent={<div className='smm:mb-2 input-field'><input type='text' placeholder='search keyword..' className='filed-input' value={search} onChange={(e) => setSearch(e.target.value)} /></div>} pagination fixedHeader selectableRowsHighlight highlightOnHover />
         </div>
       </Main>
