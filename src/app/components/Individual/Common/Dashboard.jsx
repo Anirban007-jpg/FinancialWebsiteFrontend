@@ -5,6 +5,8 @@ import Main from './Sections/Main'
 import { FaUser } from 'react-icons/fa'
 import { isAuth, signout } from '../../../../../actions/auth'
 import { useRouter } from 'next/navigation'
+import { IoSearch } from 'react-icons/io5'
+import Link from 'next/link'
 
 
 
@@ -25,15 +27,32 @@ const Dashboard = () => {
   //     signout(() => router.push('/'))
   //   }
   // })
-  
 
-  
+
+
   // console.log(data);
 
   return (
     <div className='w-full bg-slate-200 h-screen flex justify-between items-start'>
       <Sidebar />
       <Main>
+        <section className='w-full bg-transparent lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-2 gap-4'>
+          <div>
+            <h1 className='text-2xl text-black font-semibold'>Dashboard Page</h1>
+          </div>
+          <div className='flex justify-between items-center gap-10'>
+            <IoSearch className='w-6 h-6 cursor-pointer hover:scale-150 hover:text-yellow-500 transition-all' />
+            <div id="client-info" className='flex justify-center items-center gap-4'>
+              <Link href={`${data.profile}`}><img src="/download.png" alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
+              <div className='flex flex-col justify-center items-start'>
+                <div className='flex justify-center text-black items-center -mb-1 gap-2'>
+                  <h1 className='text-lg font-bold text-black'>Hi, {data.Name}</h1>
+                </div>
+                <p className='text-black'>{data.role}</p>
+              </div>
+            </div>
+          </div>
+        </section>
         <div id="main-section" className='grid lg:grid-cols-3 grid-cols-1 gap-4 w-full h-screen'>
           <div id="left" className='col-span-2 p-2 gap-3 flex flex-col justify-between items-center h-full'>
             {/* three grid layout */}

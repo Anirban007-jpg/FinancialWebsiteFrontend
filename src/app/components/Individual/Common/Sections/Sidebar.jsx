@@ -4,7 +4,7 @@ import { MdDashboard, MdLogout } from 'react-icons/md';
 import {} from 'react-icons/si';
 import {} from 'react-icons/lia';
 import {} from 'react-icons/io5';
-import { FaArrowRight, FaBook } from 'react-icons/fa';
+import { FaArrowRight, FaBook, FaUser } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { signout } from '../../../../../../actions/auth';
@@ -25,6 +25,11 @@ const navItems = [
     name: "Ledger",
     icon : FaBook,
     url : "/Individual/Ledger"
+  },
+  {
+    name: "Debtor",
+    icon : FaUser,
+    url : "/Individual/Create/Debtors"
   },
   
 
