@@ -6,12 +6,12 @@ import { getCookie } from '../../../../../actions/auth'
 
 
 
-const page = async () => {
-    const ledger = await displayLedger();
+const page = () => {
+    // let ledger = await displayLedger();
   
     return (
     <>
-        <DisplayLedgersComponent ledger={ledger}/>
+        <DisplayLedgersComponent/>
     </>
   )
 }

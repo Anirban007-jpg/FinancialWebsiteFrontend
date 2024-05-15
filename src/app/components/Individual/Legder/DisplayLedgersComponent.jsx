@@ -4,8 +4,30 @@ import Sidebar from '../Common/Sections/Sidebar'
 import Main from '../Common/Sections/Main'
 // import { displayLedger } from '../../../../../actions/ledger'
 import DataTable from 'react-data-table-component'
+import { displayLedger } from '../../../../../actions/ledger'
 
-const DisplayLedgersComponent = ({ ledger }) => {
+const tableHeaderstyle = {
+  headCells: {
+    style: {
+      fontWeight: "bolder",
+      fontSize: "14px",
+      backgroundColor: "#EBE8E8",
+      textAlign: "center",
+      border: "2px solid red",
+      textTransform: "uppercase"
+    },
+  },
+    cells: {
+      style: {  
+        fontWeight: "bold",
+        fontSize: "14px",
+        width: "200px",
+        color: "blue",
+      },
+    }
+}
+
+const DisplayLedgersComponent = () => {
 
 
   // const customStyles = {
@@ -28,7 +50,7 @@ const DisplayLedgersComponent = ({ ledger }) => {
     },
     {
       name: "Item Group",
-      selector: row => row.Account_Group
+      selector: row => row.Account_Group,
     },
     {
       name: "Head Group",
@@ -46,31 +68,23 @@ const DisplayLedgersComponent = ({ ledger }) => {
       name: "Currency",
       selector: row => row.Currency
     },
+    {
+      name: "Debtors",
+      selector: row => row.Debtors
+    },
   ]
 
-  const [data, setData] = useState(ledger.data);
+  const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState(ledger.data);
+  const [filter, setFilter] = useState([]);
 
-  const tableHeaderstyle = {
-    headCells: {
-      style: {
-        fontWeight: "bolder",
-        fontSize: "14px",
-        backgroundColor: "#EBE8E8",
-        textAlign: "center",
-        border: "2px solid red",
-        textTransform: "uppercase"
-      },
-    },
-      cells: {
-        style: {  
-          fontWeight: "bold",
-          fontSize: "14px",
-          color: "blue"
-        },
-      }
-  }
+  useEffect(() => {
+    displayLedger().then(data => {
+      setData(data);
+      setFilter(data);
+    })
+  },[])
+ 
 
   useEffect(() => {
     const result = data.filter((item) => {
@@ -79,12 +93,15 @@ const DisplayLedgersComponent = ({ ledger }) => {
     setFilter(result);
   }, [search])
 
+  
+  console.log(data);
+
   return (
     <div className='w-full bg-slate-200 h-screen flex justify-between items-start'>
       <Sidebar />
       <Main>
-        <div style={{ padding: "50px 10%" }} id="main-section" className='flex flex-col rounded-lg items-center justify-center w-full'>
-          <DataTable customStyles={tableHeaderstyle} columns={column} data={filter} subHeader subHeaderAlign='right' selectableRows subHeaderComponent={<><div className='input-field'><input type='text' placeholder='search keyword..' className='filed-input' value={search} onChange={(e) => setSearch(e.target.value)} /></div></>} pagination fixedHeader selectableRowsHighlight highlightOnHover />
+        <div style={{ padding: "50px 10%" }} id="main-section" className='flex overflow-x-scroll flex-col rounded-lg items-center justify-center w-full'>
+          <DataTable customStyles={tableHeaderstyle} columns={column} data={filter} subHeader selectableRows subHeaderComponent={<div className='smm:mb-2 input-field'><input type='text' placeholder='search keyword..' className='filed-input' value={search} onChange={(e) => setSearch(e.target.value)} /></div>} pagination fixedHeader selectableRowsHighlight highlightOnHover />
         </div>
       </Main>
     </div>

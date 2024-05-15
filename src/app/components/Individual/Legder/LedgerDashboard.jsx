@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../Common/Sections/Sidebar'
-import { FaBookDead, FaBookMedical, FaUser } from 'react-icons/fa'
+import { FaBookDead, FaBookMedical, FaBookReader, FaUser } from 'react-icons/fa'
 import Main from '../Common/Sections/Main'
 import { isAuth } from '../../../../../actions/auth'
 import LedgerCreateFormComponent from '../Common/Sections/Ledger/LedgerCreateFormComponent'
@@ -22,7 +22,7 @@ const LedgerDashboard = () => {
           <div id="left" className='col-span-1 p-2 gap-0 flex flex-col justify-between items-center h-full'>
             {/* three grid layout */}
             <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 w-full mb-0'>
-              <div className='w-full flex flex-col justify-center items-center bg-blue-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[-5deg] hover:scale-105 cursor-pointer'>
+              <div className='w-full flex flex-col justify-center items-center bg-blue-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                 <div className='w-full flex justify-between items-center'>
                   <h1 className='text-md text-black font-extrabold '>Display Ledgers</h1>
                   <h1 className='text-green-600 font-bold'>Multiple</h1>
@@ -32,11 +32,11 @@ const LedgerDashboard = () => {
                     <h1 className='text-3xl text-black font-semibold'><Link href="/Individual/Display/Ledgers">Click Here to see all Ledgers</Link></h1>
                   </div>
                   <div className='bg-blue-400 hover:bg-blue-500 cursor-pointer text-black p-3 rounded-full'>
-                    <FaUser className='w-[30px] h-[30px]' />
+                  <Link href="/Individual/Display/Ledgers"><FaBookReader className='w-[30px] h-[30px]' /></Link>
                   </div>
                 </div>
               </div>
-              <div className='w-full flex flex-col justify-center items-center bg-blue-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[-5deg] hover:scale-105 cursor-pointer'>
+              <div className='w-full flex flex-col justify-center items-center bg-blue-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-105 cursor-pointer'>
                 <div className='w-full flex justify-between items-center'>
                   <h1 className='text-md text-black font-extrabold '>Users</h1>
                   <h1 className='text-green-600 font-bold'>Newly Joined</h1>
@@ -51,7 +51,7 @@ const LedgerDashboard = () => {
                   </div>
                 </div>
               </div>
-              <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[-5deg] hover:scale-105 cursor-pointer'>
+              <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-105 cursor-pointer'>
                 <div className='w-full flex justify-between items-center'>
                   <h1 className='text-md text-black font-extrabold '>Users</h1>
                   <h1 className='text-green-600 font-bold'>Newly Joined</h1>
@@ -66,7 +66,7 @@ const LedgerDashboard = () => {
                   </div>
                 </div>
               </div>
-              <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[-5deg] hover:scale-105 cursor-pointer'>
+              <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-105 cursor-pointer'>
                 <div className='w-full flex justify-between items-center'>
                   <h1 className='text-md text-black font-extrabold '>Users</h1>
                   <h1 className='text-green-600 font-bold'>Newly Joined</h1>
