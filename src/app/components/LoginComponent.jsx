@@ -79,9 +79,7 @@ const LoginComponent = () => {
             <h2 className='font-extrabold text-3xl text-blue-950 text-center underline uppercase mb-10'>Login</h2>
             <p className='font-semibold mt-4 mb-7 text-sm text-pink-700 text-center underline'>Already a member ?.. Please sign in !!!</p>
             <form className='md:flex mdd:flex md:flex-col mdd:flex-col flex flex-col gap-4' onSubmit={handleSubmit}>
-              {role == "" && (
-                <>
-                  <div className='py-4 grid grid-cols-1 gap-4'>
+                  <div className='py-4 grid grid-cols-1 gap-0'>
                     <div className='relative'>
                       <select value={role} onChange={handleChangeInput("role")} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="">Choose a role</option>
@@ -90,8 +88,6 @@ const LoginComponent = () => {
                       </select>
                     </div>
                   </div>
-                </>
-              )}
 
               {role == "Individual" && (
                 <>

@@ -30,17 +30,17 @@ const Header = () => {
   return (
     <section className='w-full bg-transparent lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-2 gap-4'>
       <div>
-        <h1 className='text-2xl text-white font-semibold'>{pathname.substring(12)} Page</h1>
+        <h1 className='text-2xl text-black font-semibold'>{pathname.substring(12).split('/')} Page</h1>
       </div>
       <div className='flex justify-between items-center gap-10'>
         <IoSearch className='w-6 h-6 cursor-pointer hover:scale-150 hover:text-yellow-500 transition-all' />
         <div id="client-info" className='flex justify-center items-center gap-4'>
           <Link href="#"><img src="/download.png" alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
           <div className='flex flex-col justify-center items-start'>
-            <div className='flex justify-center text-white items-center -mb-1 gap-2'>
-              <h1 className='text-lg font-bold text-white'>Hi, {data.Name}</h1>
+            <div className='flex justify-center text-black items-center -mb-1 gap-2'>
+              <h1 className='text-lg font-bold text-black'>Hi, {data.Name}</h1>
             </div>
-            <p className='text-white'>{data.role}</p>
+            <p className='text-black'>{data.role}</p>
           </div>
         </div>
       </div>

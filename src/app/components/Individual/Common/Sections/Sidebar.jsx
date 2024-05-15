@@ -82,14 +82,14 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div id="expanded-icon" className='bg-yellow-500 text-black p-2 rounded-full cursor-pointer right-3 absolute lgl:bottom-28 md:bottom-0 lg:bottom-0 md:flex hidden' onClick={() => setIsExpanded(!isExpanded)}>
-        <FaArrowRight className='z-40'/>
+      <div id="expanded-icon" className='bg-yellow-500 text-black p-2 rounded-full cursor-pointer right-3 absolute md:bottom-24 md: lgl:bottom-28 lg:bottom-24 md:flex hidden' onClick={() => setIsExpanded(!isExpanded)}>
+        <FaArrowRight size={15} className='z-40'/>
       </div>
       <div id="logout-box" className='w-full flex flex-col justify-start items-center gap-4 cursor-pointer'>
         <div className='bg-slate-700 w-full h-[0.5px]'></div>
         <div className='flex justify-center items-center gap-2'>
-          <MdLogout className='text-white h-6 w-6'/>
-          <span className={'text-white text-lg font-bold cursopr-pointer ' + (isExpanded ? 'flex' : 'hidden')} onClick={() => signout(() => router.push("/"))}>Logout</span>
+          <MdLogout onClick={() => signout(() => router.push("/"))} className='text-white h-6 w-6'/>
+          <span className={'text-white text-lg font-bold  cursopr-pointer ' + (isExpanded ? 'flex' : 'hidden')} onClick={() => signout(() => router.push("/"))}>Logout</span>
         </div>
       </div>
 

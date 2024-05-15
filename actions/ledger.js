@@ -1,5 +1,5 @@
 
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
 
 export const createLedger = (ledger, token) => {
     return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/createLedger`, {
@@ -12,6 +12,18 @@ export const createLedger = (ledger, token) => {
         body : JSON.stringify(ledger)
     })
         .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+export const displayLedger = () => {
+    // console.log("isplay");
+    return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/displayLedgers`, {
+        method: 'GET',
+    })
+        .then(response => {
+            // console.log(response);
             return response.json();
         })
         .catch(err => console.log(err));

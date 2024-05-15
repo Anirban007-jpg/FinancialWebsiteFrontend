@@ -79,7 +79,6 @@ const RegisterComponent = () => {
               loading: false,
               error: '',
               success: data.message,
-              error: ''
             });
           }
       })
@@ -102,7 +101,6 @@ const RegisterComponent = () => {
               loading: false,
               error: '',
               success: data.message,
-              error: ''
             });
           }
       })
