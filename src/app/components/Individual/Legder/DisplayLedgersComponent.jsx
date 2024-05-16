@@ -24,11 +24,13 @@ const tableHeaderstyle = {
       style: {  
         fontWeight: "bold",
         fontSize: "14px",
-        width: "200px",
+        width: "260px",
         color: "blue",
       },
     }
 }
+
+const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
 const DisplayLedgersComponent = () => {
 
@@ -45,7 +47,7 @@ const DisplayLedgersComponent = () => {
     {
       name: "Account Name",
       selector: row => row.Account_Name,
-      sortable: true
+      sortable: true,
     },
     {
       name: "Balance Type",
@@ -70,10 +72,6 @@ const DisplayLedgersComponent = () => {
     {
       name: "Currency",
       selector: row => row.Currency
-    },
-    {
-      name: "Debtors",
-      selector: row => row.Debtors
     },
   ]
 
@@ -131,7 +129,7 @@ const DisplayLedgersComponent = () => {
           </div>
         </section>
         <div  id="main-section" className='flex overflow-x-scroll flex-col rounded-lg items-center justify-center w-full'>
-          <DataTable customStyles={tableHeaderstyle} columns={column} data={filter} subHeader selectableRows subHeaderComponent={<div className='smm:mb-2 input-field'><input type='text' placeholder='search keyword..' className='filed-input' value={search} onChange={(e) => setSearch(e.target.value)} /></div>} pagination fixedHeader selectableRowsHighlight highlightOnHover />
+          <DataTable customStyles={tableHeaderstyle} expandableRows expandableRowDisabled={row => row.disabled}	expandableRowsComponent={ExpandedComponent} columns={column} data={filter} subHeader subHeaderComponent={<div className='smm:mb-2 input-field'><input type='text' placeholder='search keyword..' className='filed-input' value={search} onChange={(e) => setSearch(e.target.value)} /></div>} pagination fixedHeader selectableRowsHighlight highlightOnHover />
         </div>
       </Main>
     </div>

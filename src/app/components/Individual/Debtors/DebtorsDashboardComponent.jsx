@@ -7,6 +7,7 @@ import Sidebar from '../Common/Sections/Sidebar';
 import { FaBookReader, FaUser } from 'react-icons/fa';
 import Main from '../Common/Sections/Main';
 import { useTypewriter } from 'react-simple-typewriter';
+import { UpdateDebtorLedgerBalance, createDebtor } from '../../../../../actions/debtors';
 
 const DebtorsDashboardComponent = () => {
 
@@ -18,21 +19,15 @@ const DebtorsDashboardComponent = () => {
 
 
     const [values, setValues] = useState({
-        Account_Name: "",
-        Financial_Year: "",
-        Assessment_Year: "",
-        Rate_of_tax: "",
-        Type_of_Item: "",
-        Account_Group: "",
-        Head_Item_Grou: "",
-        Tax_Account_Type: "",
-        Account_Class: "",
-        Bal_Start: "",
-        Account_SubClass: "",
-        Account_Balance_Type: "",
-        Currency: "",
+        Debtor_name:"", 
+        Debtor_address:"", 
+        Debtor_contact_no:"",
+        Debtor_email:"", 
+        Debtor_balance:"",
+        Debtor_Currency: "",
         error: '',
         success: '',
+        Account_Name: "Debtor A/C",
         loading: false
     });
 
@@ -43,20 +38,55 @@ const DebtorsDashboardComponent = () => {
         deleteSpeed: 100
     })
 
-    const { Account_Name, Currency, Financial_Year, Assessment_Year, Rate_of_tax, Type_of_Item, Account_Group, Head_Item_Group, Tax_Account_Type, Account_Class, Bal_Start, Account_SubClass, Account_Balance_Type, success, error, loading } = values;
+    const {  Debtor_name, Debtor_address, Debtor_contact_no, Debtor_email, Debtor_balance, Debtor_Currency,Account_Name, success, error, loading } = values;
 
     const handleChangeInput = (name) => e => {
         setValues({ ...values, error: '', success: '', [name]: e.target.value })
     }
 
     const token = getCookie('token');
+
     const handleFormsubmitData = (e) => {
         e.preventDefault();
         setValues({ ...values, loading: true, error: '' });
-        const ledger = { Account_Name, Currency, Financial_Year, Assessment_Year, Type_of_Item, Account_Group, Head_Item_Group, Tax_Account_Type, Account_Class, Bal_Start, Account_SubClass, Account_Balance_Type };
+        const debtor = {  Debtor_name, Debtor_address, Debtor_contact_no, Debtor_email, Debtor_balance,Debtor_Currency };
         // console.log(ledger);
-
+        createDebtor(debtor,token).then(data => {
+            if (data.error) {
+                setValues({ ...values, loading: false, error: data.error });
+            }
+            else {
+                setValues({Debtor_name:"", 
+                Debtor_address:"", 
+                Debtor_contact_no:"",
+                Debtor_email:"", 
+                Debtor_balance:"",
+                Debtor_Currency:"",
+                error: '',
+                success: data.message,
+                loading: false
+            })
+        }})
     }
+
+
+    const UpdateDebtorBalance = (e) => {
+        e.preventDefault();
+        setValues({ ...values, loading: true, error: '' });
+        // console.log(ledger);
+        UpdateDebtorLedgerBalance(Account_Name,token).then(data => {
+            if (data.error) {
+                setValues({ ...values, loading: false, error: data.error });
+            }
+            else {
+                setValues({
+                error: '',
+                success: data.message,
+                loading: false
+            })
+        }})
+    }
+
 
 
     return (
@@ -118,7 +148,7 @@ const DebtorsDashboardComponent = () => {
                                     </div>
                                 </div>
                             </Link>
-                            <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-105 cursor-pointer'>
+                            <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                                 <div className='w-full flex justify-between items-center'>
                                     <h1 className='text-md text-black font-extrabold '>Users</h1>
                                     <h1 className='text-green-600 font-bold'>Newly Joined</h1>
@@ -145,142 +175,43 @@ const DebtorsDashboardComponent = () => {
                                 <div className='form-first'>
                                     <div className='details personal'>
                                         <span className='title-for-form underline'>
-                                            Ledger Details
+                                            Debtor Details
                                         </span>
                                         <div className='fields'>
-                                            <div className='input-field'>
-                                                <label>Financial Year</label>
-                                                <select value={Financial_Year} onChange={handleChangeInput("Financial_Year")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                    <option>Choose Year</option>
-                                                    <option value="2023-24">2023-24</option>
-                                                    <option value="2024-25">2024-25</option>
-                                                    <option value="2025-26">2025-26</option>
-                                                    <option value="2026-27">2026-27</option>
-                                                </select>
+                                            <div className='input-field-fd'>
+                                                <label>Debtor Name</label>
+                                                <input value={Debtor_name} onChange={handleChangeInput("Debtor_name")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
                                             </div>
-                                            <div className='input-field'>
-                                                <label>Assessment Year</label>
-                                                <select value={Assessment_Year} onChange={handleChangeInput("Assessment_Year")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                    <option>Choose Year</option>
-                                                    <option value="2024-25">2024-25</option>
-                                                    <option value="2025-26">2025-26</option>
-                                                    <option value="2026-27">2026-27</option>
-                                                    <option value="2027-28">2027-28</option>
-                                                </select>
+                                            <div className='input-field-fd'>
+                                                <label>Debtor Address</label>
+                                                <textarea rows="5" value={Debtor_address} onChange={handleChangeInput("Debtor_address")} type="text" className="filed-input-fd-textarea" id="input-field" placeholder='' />
                                             </div>
-                                            <div className='input-field'>
-                                                <label>Account Name</label>
-                                                <input value={Account_Name} onChange={handleChangeInput("Account_Name")} type="text" className="filed-input" id="input-field" placeholder='' />
+                                            <div className='input-field-fd'>
+                                                <label>Debtor Contact No</label>
+                                                <input value={Debtor_contact_no} onChange={handleChangeInput("Debtor_contact_no")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
-                                            <div className='input-field'>
-                                                <label>Type of Item</label>
-                                                <select value={Type_of_Item} onChange={handleChangeInput("Type_of_Item")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                    <option>Choose Statement</option>
-                                                    <option value="Balance Sheet">Balance Sheet</option>
-                                                    <option value="Profit & Loss Statement">Profit & Loss</option>
-                                                    <option value="ITR Item">ITR Item</option>
-                                                </select>
+                                            <div className='input-field-fd'>
+                                                <label>Debtor Email</label>
+                                                <input value={Debtor_email} onChange={handleChangeInput("Debtor_email")} type="email" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
-                                            <div className='input-field'>
-                                                <label>Currency</label>
-                                                <input value={Currency} onChange={handleChangeInput("Currency")} type="text" className="filed-input" id="input-field" placeholder='' />
+                                            <div className='input-field-fd'>
+                                                <label>Debtor Amount</label>
+                                                <input value={Debtor_balance} onChange={handleChangeInput("Debtor_balance")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
                                             </div>
-                                            <div className='input-field'>
-                                                <label>Account Group</label>
-                                                <input value={Account_Group} onChange={handleChangeInput("Account_Group")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                            </div>
-                                            <div className='input-field'>
-                                                <label>Head Item Group</label>
-                                                <select value={Head_Item_Group} onChange={handleChangeInput("Head_Item_Group")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                    <option value="">Choose Head Account Group</option>
-                                                    <option value="Expenses">Expenses</option>
-                                                    <option value="Revenue">Revenue</option>
-                                                    <option value="Contingent Liability">Contingent Liability</option>
-                                                    <option value="Current Assets">Current Assets</option>
-                                                    <option value="Non-Current Assets">Non-Current Assets</option>
-                                                    <option value="Current Liabilities">Current Liabilities</option>
-                                                    <option value="Non-Current Liabilities">Non-Current Liabilities</option>
-                                                    <option value="Share Capital">Share Capital</option>
-                                                </select>
-                                            </div>
-                                            <div className='input-field'>
-                                                <label>Account Class</label>
-                                                <select value={Account_Class} onChange={handleChangeInput("Account_Class")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                    <option value="">Choose Account Class</option>
-                                                    <option value="Assets">Assets</option>
-                                                    <option value="Liabilities">Liabilities</option>
-                                                    <option value="Expenses">Expenses</option>
-                                                    <option value="Income">Income</option>
-                                                </select>
-                                            </div>
-                                            <div className='input-field'>
-                                                <label>Account Sub Class</label>
-                                                <select value={Account_SubClass} onChange={handleChangeInput("Account_SubClass")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                    <option value="">Choose Account Sub Class</option>
-                                                    <option value="Indirect Income">Indirect Income</option>
-                                                    <option value="Direct Income">Direct Income</option>
-                                                    <option value="Indirect Expenses">Indirect Expenses</option>
-                                                    <option value="Direct Expenses">Direct Expenses</option>
-                                                </select>
-                                            </div>
-                                            <div className='input-field'>
-                                                <label>Account Balance Type</label>
-                                                <select value={Account_Balance_Type} onChange={handleChangeInput("Account_Balance_Type")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                    <option>Choose Balance Type</option>
-                                                    <option value="Debit">Debit</option>
-                                                    <option value="Credit">Credit</option>
-                                                </select>
-                                            </div>
-                                            <div className='input-field'>
-                                                <label>Account Opening Balance</label>
-                                                <input value={Bal_Start} onChange={handleChangeInput("Bal_Start")} type="text" className="filed-input" id="input-field" placeholder='' />
+                                            <div className='input-field-fd'>
+                                                <label>Debtor Currency</label>
+                                                <input value={Debtor_Currency} onChange={handleChangeInput("Debtor_Currency")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
 
-                                            {Account_Name == "Input CGST" && (
-                                                <div className='input-field'>
-                                                    <label>Rate of Tax</label>
-                                                    <input value={Rate_of_tax} onChange={handleChangeInput("Rate_of_tax")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                                </div>
-                                            )}
-                                            {Account_Name == "Output CGST" && (
-                                                <div className='input-field'>
-                                                    <label>Rate of Tax</label>
-                                                    <input value={Rate_of_tax} onChange={handleChangeInput("Rate_of_tax")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                                </div>
-                                            )}
-                                            {Account_Name == "Input SGST" && (
-                                                <div className='input-field'>
-                                                    <label>Rate of Tax</label>
-                                                    <input value={Rate_of_tax} onChange={handleChangeInput("Rate_of_tax")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                                </div>
-                                            )}
-                                            {Account_Name == "Output SGST" && (
-                                                <div className='input-field'>
-                                                    <label>Rate of Tax</label>
-                                                    <input value={Rate_of_tax} onChange={handleChangeInput("Rate_of_tax")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                                </div>
-                                            )}
-                                            {Account_Name == "Input IGST" && (
-                                                <div className='input-field'>
-                                                    <label>Rate of Tax</label>
-                                                    <input value={Rate_of_tax} onChange={handleChangeInput("Rate_of_tax")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                                </div>
-                                            )}
-                                            {Account_Name == "Output IGST" && (
-                                                <div className='input-field'>
-                                                    <label>Rate of Tax</label>
-                                                    <input value={Rate_of_tax} onChange={handleChangeInput("Rate_of_tax")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                                </div>
-                                            )}
                                         </div>
                                     </div>
                                 </div>
                                 <div className='flex flex-row gap-2'>
-                                    <button className="submitbutton">
+                                    <button className="submitbutton" type='submit' onClick={handleFormsubmitData}>
                                         <span className="buttontext">Submit</span>
 
                                     </button>
-                                    <button className="submitbutton">
+                                    <button className="submitbutton" type='submit' onClick={UpdateDebtorBalance}>
                                         <span className="buttontext">Update Balance</span>
 
                                     </button>

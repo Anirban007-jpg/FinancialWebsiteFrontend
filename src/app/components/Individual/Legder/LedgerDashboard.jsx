@@ -57,7 +57,7 @@ const LedgerDashboard = () => {
                   </div>
                 </div>
               </Link>
-              <div className='w-full flex flex-col justify-center items-center bg-blue-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-105 cursor-pointer'>
+              <div className='w-full flex flex-col justify-center items-center bg-blue-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                 <div className='w-full flex justify-between items-center'>
                   <h1 className='text-md text-black font-extrabold '>Users</h1>
                   <h1 className='text-green-600 font-bold'>Newly Joined</h1>
@@ -73,7 +73,7 @@ const LedgerDashboard = () => {
                 </div>
               </div>
               <Link href="/Individual/Create/Debtors">
-                <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-105 cursor-pointer'>
+                <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                   <div className='w-full flex justify-between items-center'>
                     <h1 className='text-md text-black font-extrabold '>Debtor</h1>
                     <h1 className='text-green-600 font-bold'>Newly Created</h1>
@@ -89,7 +89,7 @@ const LedgerDashboard = () => {
                   </div>
                 </div>
               </Link>
-              <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-105 cursor-pointer'>
+              <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                 <div className='w-full flex justify-between items-center'>
                   <h1 className='text-md text-black font-extrabold '>Users</h1>
                   <h1 className='text-green-600 font-bold'>Newly Joined</h1>

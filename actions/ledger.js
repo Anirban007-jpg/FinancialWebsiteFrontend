@@ -1,5 +1,5 @@
 
-// import fetch from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 
 export const createLedger = (ledger, token) => {
     return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/createLedger`, {
