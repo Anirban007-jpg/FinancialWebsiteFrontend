@@ -49,7 +49,7 @@ const LedgerDashboard = () => {
                   </div>
                   <div className='w-full flex justify-between items-center'>
                     <div className='flex flex-col justify-center items-start gap-1'>
-                      <h1 className='text-3xl text-black font-semibold'><Link href="/Individual/Display/Ledgers">Click Here to see all Ledgers</Link></h1>
+                      <h1 className='text-3xl text-black font-semibold'><Link href="/Individual/Display/Ledgers"></Link></h1>
                     </div>
                     <div className='bg-blue-400 hover:bg-blue-500 cursor-pointer text-black p-3 rounded-full'>
                       <Link href="/Individual/Display/Ledgers"><FaBookReader className='w-[30px] h-[30px]' /></Link>
@@ -76,12 +76,11 @@ const LedgerDashboard = () => {
                 <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                   <div className='w-full flex justify-between items-center'>
                     <h1 className='text-md text-black font-extrabold '>Debtor</h1>
-                    <h1 className='text-green-600 font-bold'>Newly Created</h1>
+
                   </div>
                   <div className='w-full flex justify-between items-center'>
                     <div className='flex flex-col justify-center items-start gap-1'>
-                      <h1 className='text-3xl text-black font-semibold'>Create Debtors and Assign them to Ledger</h1>
-                      <p className='text-slate-700'>Debtor Creation</p>
+                      <h1 className='text-3xl text-black font-semibold'>Create and Assign Debtor</h1>
                     </div>
                     <div className='bg-green-400 hover:bg-green-500 cursor-pointer text-black p-3 rounded-full'>
                       <FaUser className='w-[30px] h-[30px]' />
@@ -108,7 +107,7 @@ const LedgerDashboard = () => {
 
           </div>
         </div>
-        <div className='mt-2 lgg:mt-[-2350px] w-screen lgg:h-full lgg:relative'>
+        <div className='smm:mt-32 lg:mt-0 mdd:mt-20 lgg:mt-[-2350px] w-screen lgg:h-full lgg:relative'>
           <LedgerCreateFormComponent />
         </div>
       </Main>
