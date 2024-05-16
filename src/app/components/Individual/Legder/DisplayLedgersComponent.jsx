@@ -24,7 +24,7 @@ const tableHeaderstyle = {
       style: {  
         fontWeight: "bold",
         fontSize: "14px",
-        width: "260px",
+        width: "100px",
         color: "blue",
       },
     }

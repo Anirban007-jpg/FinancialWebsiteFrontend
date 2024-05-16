@@ -23,8 +23,7 @@ const ProfileComponent = () => {
     return (
         <div className='w-full bg-slate-200 h-screen flex justify-between items-start'>
             <Sidebar />
-            <Main>
-                <section className='w-full bg-transparent lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-2 gap-4'>
+                <section className='w-full bg-gray-600 lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-2 gap-4'>
                     <div>
                         <h1 className='text-2xl text-black font-semibold'>Update Your Profile Here ....</h1>
                     </div>
@@ -42,7 +41,6 @@ const ProfileComponent = () => {
                     </div>
                 </section>
                 <ProfileUpdateFormComponent />
-            </Main>
         </div>
     )
 }
