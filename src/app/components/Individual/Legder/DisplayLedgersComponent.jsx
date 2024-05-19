@@ -118,7 +118,7 @@ const DisplayLedgersComponent = () => {
           <div className='flex justify-between items-center gap-10'>
             <IoSearch className='w-6 h-6 cursor-pointer hover:scale-150 hover:text-yellow-500 transition-all' />
             <div id="client-info" className='flex justify-center items-center gap-4'>
-              <Link href={`${userdata.profile}`}><img src="/download.png" alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
+              <Link href={`${userdata.profile}`}><img src={`${process.env.NEXT_PUBLIC_DOMAIN}/photo/${userdata._id}` || "/download.png"} alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
               <div className='flex flex-col justify-center items-start'>
                 <div className='flex justify-center text-black items-center -mb-1 gap-2'>
                   <h1 className='text-lg font-bold text-black'>Hi, {userdata.Name}</h1>

@@ -200,7 +200,7 @@ const DebtorsDashboardComponent = () => {
 
                                     </button>
                                     <button className="submitbutton" type='submit' onClick={UpdateDebtorBalance}>
-                                        <span className="buttontext">Update Balance</span>
+                                        <span className="buttontext">Update Debtor Ledger Balance</span>
 
                                     </button>
                                 </div>

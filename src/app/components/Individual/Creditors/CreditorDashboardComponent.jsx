@@ -22,7 +22,7 @@ const CreditorDashboardComponent = () => {
         Creditor_name: "",
         Creditor_address: "",
         Creditor_contact_no: "",
-        Credtor_email: "",
+        Creditor_email: "",
         Creditor_balance: "",
         Creditor_Currency: "",
         error: "",
@@ -162,31 +162,31 @@ const CreditorDashboardComponent = () => {
                                 <div className='form-first'>
                                     <div className='details personal'>
                                         <span className='title-for-form underline'>
-                                            Credtor Details
+                                            Creditor Details
                                         </span>
                                         <div className='fields'>
                                             <div className='input-field-fd'>
-                                                <label>Credtor Name</label>
+                                                <label>Creditor Name</label>
                                                 <input value={Creditor_name} onChange={handleChangeInput("Creditor_name")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Credtor Address</label>
+                                                <label>Creditor Address</label>
                                                 <textarea rows="5" value={Creditor_address} onChange={handleChangeInput("Creditor_address")} type="text" className="filed-input-fd-textarea" id="input-field" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Credtor Contact No</label>
+                                                <label>Creditor Contact No</label>
                                                 <input value={Creditor_contact_no} onChange={handleChangeInput("Creditor_contact_no")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Credtor Email</label>
+                                                <label>Creditor Email</label>
                                                 <input value={Creditor_email} onChange={handleChangeInput("Creditor_email")} type="email" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Credtor Amount</label>
+                                                <label>Creditor Amount</label>
                                                 <input value={Creditor_balance} onChange={handleChangeInput("Creditor_balance")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Credtor Currency</label>
+                                                <label>Creditor Currency</label>
                                                 <input value={Creditor_Currency} onChange={handleChangeInput("Creditor_Currency")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
 
@@ -199,7 +199,7 @@ const CreditorDashboardComponent = () => {
 
                                     </button>
                                     <button className="submitbutton" type='submit' onClick={UpdateCreditorBalance}>
-                                        <span className="buttontext">Update Balance</span>
+                                        <span className="buttontext">Update Creditor Ledger Balance</span>
 
                                     </button>
                                 </div>
