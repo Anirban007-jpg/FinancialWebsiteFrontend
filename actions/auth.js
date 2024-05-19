@@ -154,6 +154,20 @@ export const forgotPassword = ({Email}) => {
         .catch(err => console.log(err));
 };
 
+export const getProfile = token => {
+    return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/individual/profile`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
 export const forgotPasswordforcompanyusers = ({Company_email}) => {
     return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/forgotpasswordforCompany`, {
         method: 'PUT',
@@ -207,6 +221,21 @@ export const companysignin = info => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(info)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+export const update = (token, individual) => {
+    return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/updateIndividualProfile`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body:  individual
     })
         .then(response => {
             return response.json();

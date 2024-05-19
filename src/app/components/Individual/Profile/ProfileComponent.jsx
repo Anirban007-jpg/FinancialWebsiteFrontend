@@ -11,21 +11,22 @@ import ProfileUpdateFormComponent from '../Common/Sections/Profile/ProfileUpdate
 const ProfileComponent = () => {
 
     const [data, setData] = useState({});
-  const router = useRouter();
+    const router = useRouter();
 
-  useEffect(() => {
-    if (isAuth()) {
-      setData(isAuth());
-    }
+    useEffect(() => {
+        if (isAuth()) {
+            setData(isAuth());
+        }
 
-  }, [])
+    }, [])
 
     return (
         <div className='w-full bg-slate-200 h-screen flex justify-between items-start'>
             <Sidebar />
-                <section className='w-full bg-gray-600 lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-2 gap-4'>
+            <div className="lgg:overflow-clip bg-no-repeat w-2/5 bg-gray-500 bg-cover bg-fixed grow h-full relative overflow-y-auto overflow-x-hidden flex flex-col justify-start items-center gap-2 p-4">
+                <section className='w-full bg-transparent lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-2 gap-4'>
                     <div>
-                        <h1 className='text-2xl text-black font-semibold'>Update Your Profile Here ....</h1>
+                        <h1 className='text-2xl text-black font-semibold'>Update Profile Page</h1>
                     </div>
                     <div className='flex justify-between items-center gap-10'>
                         <IoSearch className='w-6 h-6 cursor-pointer hover:scale-150 hover:text-yellow-500 transition-all' />
@@ -40,7 +41,10 @@ const ProfileComponent = () => {
                         </div>
                     </div>
                 </section>
-                <ProfileUpdateFormComponent />
+                <div className="flex flex-col w-[60%]">
+                    <ProfileUpdateFormComponent />
+                </div>
+            </div>
         </div>
     )
 }
