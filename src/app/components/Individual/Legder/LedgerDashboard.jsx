@@ -26,7 +26,7 @@ const LedgerDashboard = () => {
           <div className='flex justify-between items-center gap-10'>
             <IoSearch className='w-6 h-6 cursor-pointer hover:scale-150 hover:text-yellow-500 transition-all' />
             <div id="client-info" className='flex justify-center items-center gap-4'>
-              <Link href={`${data.profile}`}><img src="/download.png" alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
+              <Link href={`${data.profile}`}><img src={`${process.env.NEXT_PUBLIC_DOMAIN}/photo/${data._id}` || "/download.png"} alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
               <div className='flex flex-col justify-center items-start'>
                 <div className='flex justify-center text-black items-center -mb-1 gap-2'>
                   <h1 className='text-lg font-bold text-black'>Hi, {data.Name}</h1>
@@ -88,21 +88,23 @@ const LedgerDashboard = () => {
                   </div>
                 </div>
               </Link>
+              <Link href="/Individual/Create/Creditors">
               <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                 <div className='w-full flex justify-between items-center'>
-                  <h1 className='text-md text-black font-extrabold '>Users</h1>
-                  <h1 className='text-green-600 font-bold'>Newly Joined</h1>
+                  <h1 className='text-md text-black font-extrabold '>Creditor</h1>
+                  <h1 className='text-green-600 font-bold'></h1>
                 </div>
                 <div className='w-full flex justify-between items-center'>
                   <div className='flex flex-col justify-center items-start gap-1'>
-                    <h1 className='text-3xl text-black font-semibold'>30</h1>
-                    <p className='text-slate-700'>followers</p>
+                    <h1 className='text-3xl text-black font-semibold'>Create Creditors</h1>
+                    <p className='text-slate-700'></p>
                   </div>
                   <div className='bg-green-400 hover:bg-green-500 cursor-pointer text-black p-3 rounded-full'>
                     <FaUser className='w-[30px] h-[30px]' />
                   </div>
                 </div>
               </div>
+              </Link>
             </div>
 
           </div>

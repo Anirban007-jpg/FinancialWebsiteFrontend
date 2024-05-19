@@ -41,6 +41,11 @@ const ProfileComponent = () => {
                         </div>
                     </div>
                 </section>
+                <div className='border-s border-[2px] bg-red-500 flex flex-row items-center w-full p-2 justify-center rounded-full'>
+                    {!data.email_verified && <span className="text-white font-bold text-center mt-0">
+                        Your Email Account is not verified...Please <Link href="#">Verify ur Account</Link> ASAP!!!!!
+                    </span>}
+                </div>
                 <div className="flex flex-col w-[60%]">
                     <ProfileUpdateFormComponent />
                 </div>

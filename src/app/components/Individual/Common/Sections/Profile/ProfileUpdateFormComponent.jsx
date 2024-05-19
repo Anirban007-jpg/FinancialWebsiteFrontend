@@ -102,7 +102,7 @@ const ProfileUpdateFormComponent = () => {
 
   };
 
-  console.log(userData)
+  // console.log(userData)
   const handleSubmit = e => {
     e.preventDefault();
     setValues({ ...values, loading: true });

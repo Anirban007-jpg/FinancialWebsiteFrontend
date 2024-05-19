@@ -43,7 +43,7 @@ const Dashboard = () => {
           <div className='flex justify-between items-center gap-10'>
             <IoSearch className='w-6 h-6 cursor-pointer hover:scale-150 hover:text-yellow-500 transition-all' />
             <div id="client-info" className='flex justify-center items-center gap-4'>
-              <Link href={`${data.profile}`}><img src="/download.png" alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
+              <Link href={`${data.profile}`}><img src={`${process.env.NEXT_PUBLIC_DOMAIN}/photo/${data._id}` || "/download.png"} alt='client-image' className='rounded-full w-12 h-12 bg-white' /></Link>
               <div className='flex flex-col justify-center items-start'>
                 <div className='flex justify-center text-black items-center -mb-1 gap-2'>
                   <h1 className='text-lg font-bold text-black'>Hi, {data.Name}</h1>
@@ -110,7 +110,7 @@ const Dashboard = () => {
           <div id="right" className='p-2 flex flex-col justify-center items-center gap-4 h-full'>
             <div id='top' className='border-[2px] border-s bg-transparent p-8 w-full border-red-600 rounded-xl flex flex-col justify-center items-center gap-6 h-fit'>
               <div id='image-box' className='w-full flex flex-col justify-center items-center gap-4'>
-                <img src='/download.png' alt='' className='rounded-full w-[100px] h-[100px] bg-white' />
+                <img src={`${process.env.NEXT_PUBLIC_DOMAIN}/photo/${data._id}` || "/download.png"} alt='' className='rounded-full w-[100px] h-[100px] bg-white' />
                 <div className='flex flex-col justify-center items-center'>
                   <h1 className='text-black font-bold text-2xl'>{data.Name}</h1>
                   <p className='text-green-900 text-lg font-semibold'>{data.Email}</p>
@@ -131,7 +131,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div id='bottom' className='bg-transparent border-s-gray-500 border-[1px] w-full h-full p-6 rounded-xl flex flex-col justify-center items-center gap-8'>
+            <div id='bottom' className='bg-transparent border-red-500 border-[2px] border-solid w-full h-full p-6 rounded-xl flex flex-col justify-center items-center gap-8'>
               <div className='flex md:flex-row flex-col justify-between items-center w-full gap-2'>
                 <h1 className='text-black text-bold text-md'>Will be developed later</h1>
               </div>

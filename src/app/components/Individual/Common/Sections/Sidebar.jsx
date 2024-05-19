@@ -31,9 +31,11 @@ const navItems = [
     icon : FaUser,
     url : "/Individual/Create/Debtors"
   },
-  
-
-  
+  {
+    name: "Creditor",
+    icon : FaUser,
+    url : "/Individual/Create/Creditors"
+  }, 
 ]
 
 const Sidebar = () => {

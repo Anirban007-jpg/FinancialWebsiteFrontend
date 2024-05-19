@@ -110,6 +110,7 @@ const LedgerCreateFormComponent = () => {
                                         <option>Choose Statement</option>
                                         <option value="Balance Sheet">Balance Sheet</option>
                                         <option value="Profit & Loss Statement">Profit & Loss</option>
+                                        <option value="Trading Statement">Trading Statemnt</option>
                                         <option value="ITR Item">ITR Item</option>
                                     </select>
                                 </div>

@@ -1,15 +1,15 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { getCookie, isAuth } from '../../../../../actions/auth';
-import { IoSearch } from 'react-icons/io5';
+import { useTypewriter } from 'react-simple-typewriter';
 import Link from 'next/link';
 import Sidebar from '../Common/Sections/Sidebar';
+import { IoSearch } from 'react-icons/io5';
 import { FaBookReader, FaUser } from 'react-icons/fa';
 import Main from '../Common/Sections/Main';
-import { useTypewriter } from 'react-simple-typewriter';
-import { UpdateDebtorLedgerBalance, createDebtor } from '../../../../../actions/debtors';
+import { UpdateCreditorLedgerBalance, createCreditor } from '../../../../../actions/credtiors';
 
-const DebtorsDashboardComponent = () => {
+const CreditorDashboardComponent = () => {
 
     const [data, setData] = useState({});
 
@@ -19,65 +19,66 @@ const DebtorsDashboardComponent = () => {
 
 
     const [values, setValues] = useState({
-        Debtor_name:"", 
-        Debtor_address:"", 
-        Debtor_contact_no:"",
-        Debtor_email:"", 
-        Debtor_balance:"",
-        Debtor_Currency: "",
-        error: '',
-        success: '',
-        errorforupdate: '',
-        successforupdate: '',
-        Account_Name: "Debtor A/C",
+        Creditor_name: "",
+        Creditor_address: "",
+        Creditor_contact_no: "",
+        Credtor_email: "",
+        Creditor_balance: "",
+        Creditor_Currency: "",
+        error: "",
+        success: "",
+        errorforupdate: "",
+        successforupdate: "",
+        Account_Name: "Creditor A/C",
         loading: false
     });
 
     const [text] = useTypewriter({
-        words: ['Debtors'],
+        words: ['Creditors'],
         loop: {},
         typeSpeed: 90,
         deleteSpeed: 100
     })
 
-    const {  Debtor_name, Debtor_address, Debtor_contact_no, Debtor_email, Debtor_balance, Debtor_Currency,Account_Name, success, error, errorforupdate,successforupdate,loading } = values;
+    const { Creditor_name, Creditor_address, Creditor_contact_no, Creditor_email, Creditor_balance, Creditor_Currency, Account_Name, success, error,errorforupdate,successforupdate, loading } = values;
 
     const handleChangeInput = (name) => e => {
         setValues({ ...values, error: '', success: '', [name]: e.target.value })
     }
+
 
     const token = getCookie('token');
 
     const handleFormsubmitData = (e) => {
         e.preventDefault();
         setValues({ ...values, loading: true, error: '' });
-        const debtor = {  Debtor_name, Debtor_address, Debtor_contact_no, Debtor_email, Debtor_balance,Debtor_Currency };
+        const Creditor = { Creditor_name, Creditor_address, Creditor_contact_no, Creditor_email, Creditor_balance, Creditor_Currency };
         // console.log(ledger);
-        createDebtor(debtor,token).then(data => {
+        createCreditor(Creditor, token).then(data => {
             if (data.error) {
                 setValues({ ...values, loading: false, error: data.error });
             }
             else {
                 setValues({
-                Debtor_name:"", 
-                Debtor_address:"", 
-                Debtor_contact_no:"",
-                Debtor_email:"", 
-                Debtor_balance:"",
-                Debtor_Currency:"",
-                error: '',
-                success: data.message,
-                loading: false
-            })
-        }})
+                    Creditor_name: "",
+                    Creditor_address: "",
+                    Creditor_contact_no: "",
+                    Creditor_email: "",
+                    Creditor_balance: "",
+                    Creditor_Currency: "",
+                    error: '',
+                    success: data.message,
+                    loading: false
+                })
+            }
+        })
     }
-
-
-    const UpdateDebtorBalance = (e) => {
+    
+    const UpdateCreditorBalance = (e) => {
         e.preventDefault();
         setValues({ ...values, loading: true, errorforupdate: '' });
         // console.log(ledger);
-        UpdateDebtorLedgerBalance(Account_Name,token).then(data => {
+        UpdateCreditorLedgerBalance(Account_Name,token).then(data => {
             if (data.error) {
                 setValues({ ...values, loading: false, errorforupdate: data.error });
             }
@@ -90,16 +91,13 @@ const DebtorsDashboardComponent = () => {
         }})
     }
 
-
-
     return (
         <div className='w-full bg-slate-200 h-screen flex justify-between items-start'>
             <Sidebar />
             <Main>
-                
                 <section className='w-full bg-transparent lg:h-20 h-fit flex lg:flex-row flex-col justify-between items-center p-4 rounded-xl lg:gap-1 gap-2'>
                     <div>
-                        <h1 className='text-2xl text-black font-semibold'>Debtors Page</h1>
+                        <h1 className='text-2xl text-black font-semibold'>Creditors Page</h1>
                     </div>
                     <div className='flex justify-between items-center gap-10'>
                         <IoSearch className='w-6 h-6 cursor-pointer hover:scale-150 hover:text-yellow-500 transition-all' />
@@ -135,14 +133,14 @@ const DebtorsDashboardComponent = () => {
                                     </div>
                                 </div>
                             </Link>
-                            <Link href="/Individual/Create/Creditors">
+                            <Link href="/Individual/Create/Debtors">
                                 <div className='w-full flex flex-col justify-center items-center bg-green-200 p-5 rounded-xl gap-5 transition-transform transform hover:rotate-[0deg] hover:scale-95 cursor-pointer'>
                                     <div className='w-full flex justify-between items-center'>
-                                        <h1 className='text-md text-black font-extrabold '>Creditor</h1>
+                                        <h1 className='text-md text-black font-extrabold '>Debtor</h1>
                                     </div>
                                     <div className='w-full flex justify-between items-center'>
                                         <div className='flex flex-col justify-center items-start gap-1'>
-                                            <h1 className='text-3xl text-black font-semibold'>Create Creditor</h1>
+                                            <h1 className='text-3xl text-black font-semibold'>Create Debtor</h1>
                                             <p className='text-slate-700'></p>
                                         </div>
                                         <div className='bg-green-400 hover:bg-green-500 cursor-pointer text-black p-3 rounded-full'>
@@ -151,6 +149,7 @@ const DebtorsDashboardComponent = () => {
                                     </div>
                                 </div>
                             </Link>
+
                         </div>
 
                     </div>
@@ -163,32 +162,32 @@ const DebtorsDashboardComponent = () => {
                                 <div className='form-first'>
                                     <div className='details personal'>
                                         <span className='title-for-form underline'>
-                                            Debtor Details
+                                            Credtor Details
                                         </span>
                                         <div className='fields'>
                                             <div className='input-field-fd'>
-                                                <label>Debtor Name</label>
-                                                <input value={Debtor_name} onChange={handleChangeInput("Debtor_name")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
+                                                <label>Credtor Name</label>
+                                                <input value={Creditor_name} onChange={handleChangeInput("Creditor_name")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Debtor Address</label>
-                                                <textarea rows="5" value={Debtor_address} onChange={handleChangeInput("Debtor_address")} type="text" className="filed-input-fd-textarea" id="input-field" placeholder='' />
+                                                <label>Credtor Address</label>
+                                                <textarea rows="5" value={Creditor_address} onChange={handleChangeInput("Creditor_address")} type="text" className="filed-input-fd-textarea" id="input-field" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Debtor Contact No</label>
-                                                <input value={Debtor_contact_no} onChange={handleChangeInput("Debtor_contact_no")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
+                                                <label>Credtor Contact No</label>
+                                                <input value={Creditor_contact_no} onChange={handleChangeInput("Creditor_contact_no")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Debtor Email</label>
-                                                <input value={Debtor_email} onChange={handleChangeInput("Debtor_email")} type="email" className="filed-input-fd" id="input-field-fd" placeholder='' />
+                                                <label>Credtor Email</label>
+                                                <input value={Creditor_email} onChange={handleChangeInput("Creditor_email")} type="email" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Debtor Amount</label>
-                                                <input value={Debtor_balance} onChange={handleChangeInput("Debtor_balance")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
+                                                <label>Credtor Amount</label>
+                                                <input value={Creditor_balance} onChange={handleChangeInput("Creditor_balance")} type="text" className="filed-input-fd" id="input-field" placeholder='' />
                                             </div>
                                             <div className='input-field-fd'>
-                                                <label>Debtor Currency</label>
-                                                <input value={Debtor_Currency} onChange={handleChangeInput("Debtor_Currency")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
+                                                <label>Credtor Currency</label>
+                                                <input value={Creditor_Currency} onChange={handleChangeInput("Creditor_Currency")} type="text" className="filed-input-fd" id="input-field-fd" placeholder='' />
                                             </div>
 
                                         </div>
@@ -199,14 +198,14 @@ const DebtorsDashboardComponent = () => {
                                         <span className="buttontext">Submit</span>
 
                                     </button>
-                                    <button className="submitbutton" type='submit' onClick={UpdateDebtorBalance}>
+                                    <button className="submitbutton" type='submit' onClick={UpdateCreditorBalance}>
                                         <span className="buttontext">Update Balance</span>
 
                                     </button>
                                 </div>
 
                                 {success && (
-                                    <div className='border-s border-[2px] p-2 bg-green-500 flex flex-row items-center justify-center rounded-full'>
+                                    <div className='border-s border-[2px] bg-green-500 p-2 flex flex-row items-center justify-center rounded-full'>
                                         <span className="text-white font-bold text-center mt-0">
                                             {success}
                                         </span>
@@ -219,8 +218,8 @@ const DebtorsDashboardComponent = () => {
                                         </span>
                                     </div>
                                 )}
-                                {successforupdate && (
-                                    <div className='border-s border-[2px] p-2 bg-green-500 flex flex-row items-center justify-center rounded-full'>
+                                 {successforupdate && (
+                                    <div className='border-s border-[2px] bg-green-500 p-2 flex flex-row items-center justify-center rounded-full'>
                                         <span className="text-white font-bold text-center mt-0">
                                             {successforupdate}
                                         </span>
@@ -233,6 +232,7 @@ const DebtorsDashboardComponent = () => {
                                         </span>
                                     </div>
                                 )}
+                                
                             </form>
                         </div>
                     </div>
@@ -242,4 +242,4 @@ const DebtorsDashboardComponent = () => {
     )
 }
 
-export default DebtorsDashboardComponent
+export default CreditorDashboardComponent
