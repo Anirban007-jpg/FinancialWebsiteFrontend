@@ -36,6 +36,11 @@ const navItems = [
     icon : FaUser,
     url : "/Individual/Create/Creditors"
   }, 
+  {
+    name: "Journal",
+    icon : FaUser,
+    url : "/Individual/Create/Journal"
+  }, 
 ]
 
 const Sidebar = () => {
