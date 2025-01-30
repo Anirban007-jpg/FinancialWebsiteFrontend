@@ -40,3 +40,16 @@ export const displayDebtors = () => {
         })
         .catch(err => console.log(err));
 };
+
+
+export const displayCreditors = () => {
+    // console.log("isplay");
+    return fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/displayCreditors`, {
+        method: 'GET',
+    })
+        .then(response => {
+            // console.log(response);
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};

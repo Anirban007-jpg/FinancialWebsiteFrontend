@@ -134,9 +134,9 @@ const ProfileUpdateFormComponent = () => {
 
   return (
     <div className="flex gap-[20px] mt-[20px]">
-      <div className="flex-1 bg-slate-400 p-[20px] rounded-[10px] font-bold text-white max-h-max h-[550px] w-[50%]">
-        <div className="w-[100%] h-[500px] relative overflow-hidden mb-[20px] rounded-[10px]">
-          <img src={`${process.env.NEXT_PUBLIC_DOMAIN}/photo/${_id}` || "/download.png"} fill className='w-[425px] h-[545px]' style={{ maxHeight: '100%', maxWidth: '100%' }} alt="/download.png" />
+      <div className="flex-1 bg-slate-400 p-[20px] rounded-[10px] font-bold text-white max-h-max h-[700px] w-[50%]">
+        <div className="w-[100%] h-[700px] relative overflow-hidden mb-[20px] rounded-[10px]">
+          <img src={`${process.env.NEXT_PUBLIC_DOMAIN}/photo/${_id}` || "/download.png"} fill className='w-[625px] h-[645px]' style={{ maxHeight: '100%', maxWidth: '100%' }} alt="/download.png" />
         </div>
       </div>
       <div className="flex-5 w-[50%] bg-slate-400 p-[20px] rounded-[10px]">

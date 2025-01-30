@@ -9,13 +9,14 @@ import { useTypewriter } from 'react-simple-typewriter';
 import { stimulatejournal } from '../../../../../actions/journal';
 import FormData from 'form-data';
 import { getCookie, isAuth } from '../../../../../actions/auth';
-import { displayDebtors, displayLedger } from '../../../../../actions/ledger';
+import { displayCreditors, displayDebtors, displayLedger } from '../../../../../actions/ledger';
 
 const JournalDashboardComponent = () => {
 
     const [data, setData] = useState({});
     const [ledgerdata, setLedgerData] = useState([]);
     const [debtordata, setDebtorData] = useState([]);
+    const [creditordata, setCreditorData] = useState([]);
     const [returnedData, setRuturendData] = useState({});
 
     useEffect(() => {
@@ -27,14 +28,16 @@ const JournalDashboardComponent = () => {
         displayDebtors().then(data => {
             setDebtorData(data);
         })
+        displayCreditors().then(data => {
+            setCreditorData(data);
+        })
     }, [])
-
-
 
 
     const [values, setValues] = useState({
         Financial_Year: '',
         Assessment_Year: '',
+        Document_No: '',
         Document_id: '',
         error: '',
         success: '',
@@ -45,12 +48,13 @@ const JournalDashboardComponent = () => {
         showStimulateForm: true,
         showPostingForm: false,
         Debit_item: "",
-        Discount_Allowed: "",
+        Discount_Allowed_on_Debtors_Balance: 0,
+        Discount_Allowed: 0,
         Credit_item: "",
         Debit_Item_balance: 0,
         Credit_Item_balance: 0,
         Narration: "",
-        Discount_Received: "",
+        Discount_Received: 0,
         Debit_Item_Balance_Type: "",
         Discount_Allowed_on_debtors: "",
         Credit_Item_Balance_Type: "",
@@ -58,6 +62,8 @@ const JournalDashboardComponent = () => {
         Debit_Item_Currency: "",
         Credit_Item_Currency: "",
         Debtor_name: "",
+        Creditor_name: "",
+        Discount_Allowed_Balance: 0,
         data_obtained: {}
     });
 
@@ -72,7 +78,7 @@ const JournalDashboardComponent = () => {
 
     };
 
-    const { Debit_item, Credit_item, Discount_Allowed_on_debtors, Debit_Item_Currency, Credit_Item_Currency, Credit_Item_Balance_Type, showPostingForm, showStimulateForm, Discount_Received_on_creditors, Document_id, Debtor_name, Credit_Item_balance, Debit_Item_Balance_Type, Debit_Item_balance, Narration, data_obtained, Discount_Allowed, Discount_Received, Document_Header, Financial_Year, Assessment_Year, Posting_Date, Document_Date, error, success, loading } = values;
+    const { Debit_item, Credit_item, Discount_Allowed_on_debtors, Document_No, Creditor_name, Debit_Item_Currency, Credit_Item_Currency, Credit_Item_Balance_Type, showPostingForm, showStimulateForm, Discount_Received_on_creditors, Document_id, Debtor_name, Credit_Item_balance, Debit_Item_Balance_Type, Debit_Item_balance, Narration, data_obtained, Discount_Allowed, Discount_Received, Document_Header, Financial_Year, Assessment_Year, Posting_Date, Document_Date, error, success, loading } = values;
 
     const [text] = useTypewriter({
         words: ['Journal'],
@@ -84,7 +90,7 @@ const JournalDashboardComponent = () => {
     const token = getCookie('token');
     const handleFormsubmitData = (e) => {
         e.preventDefault();
-        let info = { Debit_item, Debit_Item_balance, Credit_item, Discount_Allowed, Discount_Received, Credit_Item_balance, Discount_Received_on_creditors, Discount_Allowed_on_debtors, Narration, Financial_Year, Document_id, Assessment_Year, Document_Date, Posting_Date, Document_Header, Debit_Item_Currency, Credit_Item_Currency };
+        let info = { Debit_item, Debit_Item_balance, Credit_item, Discount_Allowed, Creditor_name, Debtor_name, Discount_Received, Credit_Item_balance, Discount_Received_on_creditors, Discount_Allowed_on_debtors, Narration, Financial_Year, Document_id, Assessment_Year, Document_Date, Posting_Date, Document_Header, Debit_Item_Currency, Credit_Item_Currency };
         setValues({ ...values, loading: true, error: '' });
         // const data = Object.fromEntries(userData);
         stimulatejournal(info, token).then(data => {
@@ -99,7 +105,7 @@ const JournalDashboardComponent = () => {
                     loading: false,
                     showStimulateForm: false,
                     showPostingForm: true,
-                    data_obtained: data
+                    data_obtained: data,
                 });
 
             }
@@ -207,6 +213,14 @@ const JournalDashboardComponent = () => {
                                                 <label>Document Date</label>
                                                 <input value={Document_Date} onChange={handleChangeInput("Document_Date")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="date" placeholder="Please select a date" />
                                             </div>
+                                            {showPostingForm && (
+                                                <>
+                                                    <div className='input-field'>
+                                                        <label>Document No</label>
+                                                        <input value={data_obtained.Document_No} onChange={handleChangeInput("Document_No")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" disabled />
+                                                    </div>
+                                                </>
+                                            )}
                                             <div className='input-field'>
                                                 <label>Posting Date</label>
                                                 <input value={Posting_Date} onChange={handleChangeInput("Posting_Date")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="date" placeholder="Please select a date" />
@@ -219,10 +233,14 @@ const JournalDashboardComponent = () => {
                                                 <label>Document Id</label>
                                                 <input value={Document_id} onChange={handleChangeInput("Document_id")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="text" placeholder="" />
                                             </div>
-                                            <div className='input-field'>
-                                                <label>Narration</label>
-                                                <textarea rows="3" value={Narration} onChange={handleChangeInput("Narration")} className="filed-input-journal-textarea " type="text" placeholder="" />
+                                            <div className='fields'>
+                                                <div className='input-field'>
+                                                    <label>Narration</label>
+                                                    <textarea rows="3" value={Narration} onChange={handleChangeInput("Narration")} className="filed-input-journal-textarea" type="text" placeholder="" />
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div className='fields'>
                                             <div className='input-field'>
                                                 <label>Debit Item Currency</label>
                                                 <input value={Debit_Item_Currency} onChange={handleChangeInput("Debit_Item_Currency")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="text" placeholder="" />
@@ -247,122 +265,141 @@ const JournalDashboardComponent = () => {
                                                 <label>Credit Item Currency</label>
                                                 <input value={Credit_Item_Currency} onChange={handleChangeInput("Credit_Item_Currency")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="text" placeholder="" />
                                             </div>
-                                            <hr className='w-full border-[2px] border-solid border-gray-800' />
-                                            {showStimulateForm && (
-                                                <>
-                                                    <span className='title-for-form underline'>
-                                                        Debit Item Details
-                                                    </span><br></br>
-                                                    <div className='fields'>
-                                                        <div className='input-field'>
-                                                            <label>Debit Item</label>
-                                                            <select value={Debit_item} onChange={handleChangeInput("Debit_item")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                                <option value=""> Select Account</option>
-                                                                {ledgerdata.map((data, index) => (
-                                                                    <option key={index} value={data.Account_Name}>{data.Account_Name}</option>
-                                                                ))}
-                                                            </select>
-                                                        </div>
-
-                                                        {Debit_item === "Purchase A/C" && (
-                                                            <div className='input-field'>
-                                                                <label>Discount Allowed</label>
-                                                                <input value={Discount_Allowed} onChange={handleChangeInput("Discount_Allowed")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="text" placeholder="" />
-                                                            </div>
-                                                        )}
-                                                        <div className='input-field'>
-                                                            <label>Debit Item Balance</label>
-                                                            <input value={Debit_Item_balance} onChange={handleChangeInput("Debit_Item_balance")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="number" placeholder="" />
-                                                        </div>
-
-                                                        <div className='input-field'>
-                                                            <label>Debit Item Balance Type</label>
-                                                            <select value={Debit_Item_Balance_Type} onChange={handleChangeInput("Debit_Item_Balance_Type")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                                <option>Choose Balance Type</option>
-                                                                <option value="Dr">Debit</option>
-                                                                <option value="Cr">Credit</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )}
-
-                                            {showStimulateForm && (
-                                                <>
-                                                    <hr className='w-full border-[2px] border-solid border-gray-800' />
-                                                    <span className='title-for-form underline'>
-                                                        Credit Item Details
-                                                    </span>
-                                                    <div className='fields'>
-                                                        <div className='input-field'>
-                                                            <label>Credit Item</label>
-                                                            <select value={Credit_item} onChange={handleChangeInput("Credit_item")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                                <option value=""> Select Account</option>
-                                                                {ledgerdata.map((data, index) => (
-                                                                    <option key={index} value={data.Account_Name}>{data.Account_Name}</option>
-                                                                ))}
-                                                            </select>
-                                                        </div>
-
-                                                        {Credit_item === "Debtor A/C" && (
-                                                            <div className='input-field'>
-                                                                <label>Debtor Name</label>
-                                                                <select value={Debtor_name} onChange={handleChangeInput("Debtor_name")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                                    {
-                                                                        debtordata.map((data, index) => (
-                                                                            <option key={index} value={data.Debtor_name}>{data.Debtor_name}</option>
-                                                                        ))
-                                                                    }
-                                                                </select>
-                                                            </div>
-                                                        )}
-                                                        {Credit_item === "Debtor A/C" && (
-                                                            <div className='input-field'>
-                                                                <label>Debtor Discount</label>
-                                                                <input value={Discount_Allowed_on_debtors} onChange={handleChangeInput("Discount_Allowed_on_debtors")} type="text" className="filed-input" id="input-field" placeholder='' />
-                                                            </div>
-                                                        )}
-
-                                                        {Credit_item === "Sale A/C" && (
-                                                            <div className='input-field'>
-                                                                <label>Discount Received</label>
-                                                                <input value={Discount_Received} onChange={handleChangeInput("Discount_Received")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="text" placeholder="" />
-                                                            </div>
-                                                        )}
-                                                        <div className='input-field'>
-                                                            <label>Credit Item Balance</label>
-                                                            <input value={Credit_Item_balance} onChange={handleChangeInput("Credit_Item_balance")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="number" placeholder="" />
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )}
-                                            {showPostingForm && (
-                                                <>
-                                                    <div className='fields'>
-                                                        <div className='input-field'>
-                                                            <label>Debit Item</label>
-                                                            <select value={Debit_item} onChange={handleChangeInput("Debit_item")} type="text" className="filed-input" id="input-field" placeholder=''>
-                                                                <option value=""> Select Account</option>
-                                                                {ledgerdata.map((data, index) => (
-                                                                    <option key={index} value={data.Account_Name}>{data.Account_Name}</option>
-                                                                ))}
-                                                            </select>
-                                                        </div>
-                                                        {Debit_item === "Purchase A/C" && (
-                                                            <div className='input-field'>
-                                                                <label>Discount Allowed</label>
-                                                                <input value={Discount_Allowed} onChange={handleChangeInput("Discount_Allowed")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="text" placeholder="" />
-                                                            </div>
-                                                        )}
-                                                        <div className='input-field'>
-                                                            <label>Debit Item Balance</label>
-                                                            <input value={Debit_Item_balance} onChange={handleChangeInput("Debit_Item_balance")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="number" placeholder="" />
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )}
-
                                         </div>
+                                        <hr className='w-full border-[2px] border-solid border-gray-800' />
+                                        {showStimulateForm && (
+                                            <>
+                                                <span className='title-for-form underline'>
+                                                    Debit Item Details
+                                                </span><br></br>
+                                                <div className='fields'>
+                                                    <div className='input-field'>
+                                                        <label>Debit Item</label>
+                                                        <select value={Debit_item} onChange={handleChangeInput("Debit_item")} type="text" className="filed-input" id="input-field" placeholder=''>
+                                                            <option value=""> Select Account</option>
+                                                            {ledgerdata.map((data, index) => (
+                                                                <option key={index} value={data.Account_Name}>{data.Account_Name}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                    {Debit_item === "Creditor A/C" && (
+                                                        <div className='input-field'>
+                                                            <label>Debtor Name</label>
+                                                            <select value={Creditor_name} onChange={handleChangeInput("Creditor_name")} type="text" className="filed-input" id="input-field" placeholder=''>
+                                                                {
+                                                                    creditordata.map((data, index) => (
+                                                                        <option key={index} value={data.Creditor_name}>{data.Creditor_name}</option>
+                                                                    ))
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    )}
+
+                                                    {Debit_item === "Creditor A/C" && (
+                                                        <div className='input-field'>
+                                                            <label>Creditor allowed Discount on Final Seetlement</label>
+                                                            <input value={Discount_Received_on_creditors} onChange={handleChangeInput("Discount_Received_on_creditors")} type="text" className="filed-input" id="input-field" placeholder='' />
+                                                        </div>
+                                                    )}
+                                                    {Credit_item === "Sale A/C" && (
+                                                        <div className='input-field'>
+                                                            <label>Discount Allowed</label>
+                                                            <input value={Discount_Allowed} onChange={handleChangeInput("Discount_Allowed")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="number" placeholder="" />
+                                                        </div>
+                                                    )}
+
+                                                    <div className='input-field'>
+                                                        <label>Debit Item Balance</label>
+                                                        <input value={Debit_Item_balance} onChange={handleChangeInput("Debit_Item_balance")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="number" placeholder="" />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {showStimulateForm && (
+                                            <>
+                                                <hr className='w-full border-[2px] border-solid border-gray-800' />
+                                                <span className='title-for-form underline'>
+                                                    Credit Item Details
+                                                </span>
+                                                <div className='fields'>
+                                                    <div className='input-field'>
+                                                        <label>Credit Item</label>
+                                                        <select value={Credit_item} onChange={handleChangeInput("Credit_item")} type="text" className="filed-input" id="input-field" placeholder=''>
+                                                            <option value=""> Select Account</option>
+                                                            {ledgerdata.map((data, index) => (
+                                                                <option key={index} value={data.Account_Name}>{data.Account_Name}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                    {Credit_item === "Debtor A/C" && (
+                                                        <div className='input-field'>
+                                                            <label>Debtor Name</label>
+                                                            <select value={Debtor_name} onChange={handleChangeInput("Debtor_name")} type="text" className="filed-input" id="input-field" placeholder=''>
+                                                                {
+                                                                    debtordata.map((data, index) => (
+                                                                        <option key={index} value={data.Debtor_name}>{data.Debtor_name}</option>
+                                                                    ))
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    )}
+                                                    {Credit_item === "Debtor A/C" && (
+                                                        <div className='input-field'>
+                                                            <label>Debtor Discount</label>
+                                                            <input value={Discount_Allowed_on_debtors} onChange={handleChangeInput("Discount_Allowed_on_debtors")} type="text" className="filed-input" id="input-field" placeholder='' />
+                                                        </div>
+                                                    )}
+
+                                                    {Debit_item === "Purchase A/C" && (
+                                                        <div className='input-field'>
+                                                            <label>Discount Recieved</label>
+                                                            <input value={Discount_Received} onChange={handleChangeInput("Discount_Received")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="number" placeholder="" />
+                                                        </div>
+                                                    )}
+
+
+                                                    <div className='input-field'>
+                                                        <label>Credit Item Balance</label>
+                                                        <input value={Credit_Item_balance} onChange={handleChangeInput("Credit_Item_balance")} className="filed-input focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm  ease-soft rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-[3px] focus:border-solid focus:border-fuchsia-300 focus:outline-none" type="number" placeholder="" />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
+                                        {showPostingForm && (
+                                            <>
+                                                <div className='fields'>
+                                                    <div className='input-field'>
+                                                        <label>Debit Item</label>
+                                                        <input value={data_obtained.Debit_item} disabled onChange={handleChangeInput("Debit_item")} type="text" className="filed-input" id="input-field" placeholder='' />
+                                                    </div>
+                                                    <div className='input-field'>
+                                                        <label>Debit Item Balance</label>
+                                                        <input value={data_obtained.Debit_Item_balance} disabled onChange={handleChangeInput("Debit_Item_balance")} type="number" className="filed-input" id="input-field" placeholder='' />
+                                                    </div>
+                                                    <div className='input-field'>
+                                                        <label>Credit Item</label>
+                                                        <input value={data_obtained.Credit_item} disabled onChange={handleChangeInput("Credit_item")} type="text" className="filed-input" id="input-field" placeholder='' />
+                                                    </div>
+                                                    <div className='input-field'>
+                                                        <label>Debit Item Balance</label>
+                                                        <input value={data_obtained.Credit_Item_balance} disabled onChange={handleChangeInput("Credit_Item_balance")} type="number" className="filed-input" id="input-field" placeholder='' />
+                                                    </div>
+                                                    <div className='input-field'>
+                                                        <label>Discount Allowed</label>
+                                                        <input value={data_obtained.Discount_Allowed_Balance} disabled onChange={handleChangeInput("Discount_Allowed_Balance")} type="number" className="filed-input" id="input-field" placeholder='' />
+                                                    </div>
+                                                    <div className='input-field'>
+                                                        <label>Discount Allowed on Debtors</label>
+                                                        <input value={data_obtained.Discount_Allowed_on_Debtors_Balance} disabled onChange={handleChangeInput("Discount_Allowed_on_Debtors_Balance")} type="number" className="filed-input" id="input-field" placeholder='' />
+                                                    </div>
+                                                    <div className='input-field'>
+                                                        <label>Discount Received</label>
+                                                        <input value={data_obtained.Discount_Received_Balance} disabled onChange={handleChangeInput("Discount_Received_Balance")} type="number" className="filed-input" id="input-field" placeholder='' />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                     {showStimulateForm && (
                                         <button className="submitbutton" type="submit" onClick={handleFormsubmitData}>
@@ -393,9 +430,9 @@ const JournalDashboardComponent = () => {
                             </form>
                         </div>
                     </div>
-                </div>
-            </Main>
-        </div>
+                </div >
+            </Main >
+        </div >
     )
 }
 

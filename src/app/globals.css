@@ -100,6 +100,7 @@
     color: black;
     font-weight: bold;
 }
+
 .input-field label {
     font-weight: bold;
     font-size: 12px;
@@ -156,17 +157,16 @@
 }
 
 .filed-input-journal-textarea {
-    height: 150px;
+    height: 90px;
     margin: 12px 0;
     padding: 0 15px;
     outline: none;
     border: 1px solid gray;
     border-radius: 10px;
     color: blue;
-    width: 100%;
     font-weight: bolder;
     display: block;
-    width: 850px;
+    width: 840px;
     background-color: transparent;
 }
 
@@ -221,11 +221,59 @@
     .input-field {
         width: calc(100%/ 1 - 15px);
     }
+
+    .filed-input-journal-textarea {
+        height: 90px;
+        margin: 12px 0;
+        padding: 0 15px;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 10px;
+        color: blue;
+        font-weight: bolder;
+        display: block;
+        width: 200px;
+        background-color: transparent;
+    }
 }
 
 @media (min-width: 375px) {
     .input-field {
         width: calc(100%/ 2 - 15px);
+    }
+
+    .filed-input-journal-textarea {
+        height: 90px;
+        margin: 12px 0;
+        padding: 0 15px;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 10px;
+        color: blue;
+        font-weight: bolder;
+        display: block;
+        width: 240px;
+        background-color: transparent;
+    }
+}
+
+@media (min-width: 425px) {
+    .input-field {
+        width: calc(100%/ 2 - 15px);
+    }
+
+    .filed-input-journal-textarea {
+        height: 90px;
+        margin: 12px 0;
+        padding: 0 15px;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 10px;
+        color: blue;
+        font-weight: bolder;
+        display: block;
+        width: 290px;
+        background-color: transparent;
     }
 }
 
@@ -244,12 +292,28 @@
         min-width: 550px;
         background-color: transparent;
     }
+
+
+    .filed-input-journal-textarea {
+        height: 90px;
+        margin: 12px 0;
+        padding: 0 15px;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 10px;
+        color: blue;
+        font-weight: bolder;
+        display: block;
+        width: 840px;
+        background-color: transparent;
+    }
 }
 
 @media (min-width: 1440px) {
     .input-field {
         width: calc(100%/ 3 - 15px);
     }
+
 
 
 
@@ -262,4 +326,3 @@
 
 
 }
-
